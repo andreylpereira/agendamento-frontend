@@ -1,1 +1,50 @@
-<p>login works!</p>,
+<div class="card-body pt-1">
+  <h1 class="card-title text-center mt-0"><b>Login</b></h1>
+  <form [formGroup]="loginForm">
+    <div class="form-group">
+      <label for="">Login*</label>
+      <input
+        type="login"
+        class="form-control"
+        aria-describedby="helpId"
+        placeholder="Digite seu login"
+        formControlName="login"
+      />
+      <small
+        id="helpId"
+        class="form-text"
+        *ngIf="
+          (loginForm.get('login')?.hasError('required') ||
+            loginForm.get('login')?.hasError('login')) &&
+          loginForm.controls['login']?.touched
+        "
+        ><b>* Favor digitar um login válido!</b></small
+      >
+    </div>
+    <label for="">Senha*</label>
+    <input
+      type="password"
+      class="form-control"
+      aria-describedby="helpId"
+      placeholder="Digite sua senha"
+      formControlName="senha"
+    />
+    <small
+      id="helpId"
+      class="form-text"
+      *ngIf="
+        loginForm.get('senha')?.hasError('required') &&
+        loginForm.controls['senha']?.touched
+      "
+      ><b>* Campo senha obrigatório!</b></small
+    >
+    <br />
+    <button
+      type="button"
+      class="btn btn-default btn-lg btn-block mb-4 shadow"
+      (click)="login()"
+    >
+      ENTRAR
+    </button>
+  </form>
+</div>

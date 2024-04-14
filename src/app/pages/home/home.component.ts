@@ -1,14 +1,12 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [
-    CommonModule,
-  ],
+  selector: 'home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent { }
+export class HomeComponent implements OnInit {
+
+  ngOnInit(): void {
+
+  }
+}
