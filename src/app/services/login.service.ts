@@ -35,12 +35,12 @@ export class LoginService {
       next: (res: any) => {
         localStorage.setItem('currentUser', JSON.stringify(res));
         this.router.navigate(['home']);
-        this.toastr.success('Logout efetuado com sucesso.', 'Sucesso!', {
+        this.toastr.success('Login efetuado com sucesso.', 'Sucesso!', {
           timeOut: 2000,
         });
       },
       error: (err: any) => {
-        this.toastr.error(err.error.message, err.error.title, {
+        this.toastr.error('Não foi possível iniciar a sessão.', 'Error!', {
           timeOut: 2000,
         });
       },
