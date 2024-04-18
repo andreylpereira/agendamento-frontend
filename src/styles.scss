@@ -1,9 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
 // <uniquifier>: Use a unique and descriptive class name
 // <weight>: Use a value from 300 to 800
-
 * {
   font-family: "Open Sans", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
+}
+
+/* Variaveis */
+$ember: #ff9900;
+$ember-hover: #cc6600;
+$ember-focus: rgba(255, 153, 0, 0.5);
+$ember-disabled: #ffc266;
+
+
+.form-text {
+  font-style: italic;
+}
+
+.bg-ember {
+  background-color: $ember;
+}
+
+.navbar-ember {
+  color: aliceblue;
+  background-color: $ember;
+}
+
+/* Estilos do Botão */
+.btn-ember {
+  color: aliceblue;
+  background-color: $ember;
+  border-color: $ember;
+}
+
+.btn-ember:hover {
+  background-color: $ember-hover;
+  border-color: $ember-hover;
+}
+
+.btn-ember:focus,
+.btn-ember.focus {
+  box-shadow: 0 0 0 0.2rem $ember-focus;
+}
+
+.btn-ember.disabled,
+.btn-ember:disabled {
+  background-color: $ember-disabled;
+  border-color: $ember-disabled;
 }

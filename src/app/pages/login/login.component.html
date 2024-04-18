@@ -1,4 +1,65 @@
-<div class="card-body pt-1">
+<div class="bg-ember" style="height: 100vh; display: flex; justify-content: center; align-items: center;">
+  <div class="container">
+      <div class="row justify-content-center">
+          <div style="width: 400px;">
+              <div class="card shadow">
+                  <div class="card-header">
+                      <div class="card-body">
+                          <form [formGroup]="loginForm">
+                              <div class="text-center mb-3">
+                                  <img src="../../../assets/user.svg" alt="Logo" width="150" height="150">
+                              </div>
+                              <div class="form-group">
+                                  <label for="login" class="font-weight-bold">Login</label>
+                                  <input         type="login"
+                                  class="form-control"
+                                  aria-describedby="helpId"
+                                  placeholder="Digite seu login"
+                                  formControlName="login">
+                                  <small id="helpId" class="form-text text-danger" *ngIf="
+                                  (loginForm.get('login')?.hasError('required') ||
+                                    loginForm.get('login')?.hasError('login')) &&
+                                  loginForm.controls['login']?.touched
+                                "><b>* Favor digitar um login válido!</b></small>
+                              </div>
+                              <div class="form-group">
+                                  <label for="senha" class="font-weight-bold">Senha</label>
+                                  <input type="password"
+                                  class="form-control"
+                                  aria-describedby="helpId"
+                                  placeholder="Digite sua senha"
+                                  formControlName="senha">
+                                  <small id="helpId" class="form-text text-danger" id="helpId"
+                                  *ngIf="
+                                    loginForm.get('senha')?.hasError('required') &&
+                                    loginForm.controls['senha']?.touched
+                                  "><b>* Favor digitar uma senha válida!</b></small>
+                              </div>
+                              <button type="submit" class="btn btn-ember btn-block font-weight-bold mt-4 rounded shadow" (click)="login()">ENTRAR</button>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="card-body pt-1">
   <h1 class="card-title text-center mt-0"><b>Login</b></h1>
   <form [formGroup]="loginForm">
     <div class="form-group">
@@ -47,4 +108,4 @@
       ENTRAR
     </button>
   </form>
-</div>
+</div> -->

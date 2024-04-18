@@ -1,3 +1,27 @@
 :host {
   display: block;
+    // background-color: red;
+    height: 100vh;
+}
+  hr {
+    border: none;
+    height: 1px;
+  }
+
+  .hora {
+    font-size: 1.5em;
+    text-align: center;
+  }
+
+  .underline {
+    border: none;
+    height: 1px;
+    margin: 12px;
+    background-color: rgba(199, 199, 199, 0.50);
+  }
+  .scrolling {
+    overflow-y: scroll;
+    height: 45vh;
+    position: relative;
+    // overflow-x: hidden;
 }
