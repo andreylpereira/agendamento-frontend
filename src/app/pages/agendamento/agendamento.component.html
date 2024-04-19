@@ -1,0 +1,53 @@
+<app-navbar></app-navbar>
+<main style="height: 100vh; display: flex; align-items: center">
+  <div class="card shadow container">
+    <div class="card-body">
+      <div class="align-items-center">
+        <div class="text-center">
+          <h1 class="font-weight-bold mb-0">{{ dataSelecionada | date:'d' }}</h1>
+        </div>
+        <div class="row">
+          <div class="col">
+            <hr class="w-25 my-2 bg-ember" />
+          </div>
+        </div>
+        <div>
+          <p class="font-weight-bold text-center text-capitalize mb-0" style="font-size: 14px">
+            {{ dataSelecionada | date:'EEEE' : 'pt-BR' }}
+          </p>
+        </div>
+        <div class="d-flex justify-content-center">
+          <div id="datePickerContainer" class="mt-4 mb-4">
+            <label for="datePicker" class="mb-0 text-center">Selecione uma data:</label>
+            <input type="date" id="datePicker" class="form-control text-center" placeholder="dd/mm/aaaa"
+              [(ngModel)]="dataSelecionada" (ngModelChange)="atualizarListagem()" />
+          </div>
+        </div>
+        <hr class="w-100 my-2 bg-secondary" />
+        <div class="scrolling">
+          <div class="row container-fluid mb-2" *ngFor="let hora of horas">
+            <div class="col-md-2 order-md-1 order-1 mb-3 mb-md-0">
+              <button type="button" class="btn bold btn-ember btn-lg btn-block shadow" data-toggle="tooltip" title="Teste tooltip">
+                {{ hora | horaFormatada }}
+              </button>
+            </div>
+            <div class="col-md-10 order-md-2 order-2 p-0 container">
+              <div *ngIf="temAgendamento(hora); else disponivel">
+                <div *ngFor="let agenda of agendamentos">
+                  <ng-container *ngIf="hora === agenda.hora">
+                    {{ agenda.id }} - {{ agenda.titulo }}
+                  </ng-container>
+                </div>
+              </div>
+              <ng-template #disponivel>
+                Nenhum agendamento realizado neste horário.
+              </ng-template>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <hr class="w-100 my-2 bg-secondary" />
+    </div>
+  </div>
+</main>

@@ -10,14 +10,23 @@ import { AuthInterceptor } from './_helpers/auth.interceptors';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { LoginComponent } from './pages/login/login.component';
-import { HomeComponent } from './pages/home/home.component';
+import { AgendamentoComponent } from './pages/agendamento/agendamento.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import localePT from '@angular/common/locales/pt';
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import { HoraFormatadaPipe } from './pipes/HoraFormatadaPipe';
+import { NavbarComponent } from './components/navbar.component';
+
+registerLocaleData(localePT);
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    AgendamentoComponent,
+    HoraFormatadaPipe,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -28,10 +37,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     ToastrModule.forRoot()
   ],
+  exports: [HoraFormatadaPipe],
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: LOCALE_ID, useValue: 'pt-br' },
   ],
   bootstrap: [AppComponent]
 })

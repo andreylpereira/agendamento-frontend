@@ -49,3 +49,16 @@ $ember-disabled: #ffc266;
   background-color: $ember-disabled;
   border-color: $ember-disabled;
 }
+
+/* Estilos tooltip */
+.tooltip-inner {
+  background-color: #333;
+  color: #fff;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+.arrow::before {
+  border-top-color: #333;
+}
