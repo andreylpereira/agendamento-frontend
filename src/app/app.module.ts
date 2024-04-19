@@ -16,7 +16,9 @@ import localePT from '@angular/common/locales/pt';
 import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import { HoraFormatadaPipe } from './pipes/HoraFormatadaPipe';
-import { NavbarComponent } from './components/navbar.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { GenericoModalComponent } from './components/modals/GenericoModal/GenericoModal.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 registerLocaleData(localePT);
 
@@ -26,7 +28,8 @@ registerLocaleData(localePT);
     LoginComponent,
     AgendamentoComponent,
     HoraFormatadaPipe,
-    NavbarComponent
+    NavbarComponent,
+    GenericoModalComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +38,7 @@ registerLocaleData(localePT);
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    MatDialogModule,
     ToastrModule.forRoot()
   ],
   exports: [HoraFormatadaPipe],

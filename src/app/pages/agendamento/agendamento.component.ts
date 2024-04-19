@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Agendamento from 'src/app/models/agendamento.model';
 import { AgendamentoService } from 'src/app/services/agendamento.service';
+import { ModalService } from 'src/app/services/modal.service';
 @Component({
   selector: 'agendamento',
   templateUrl: './agendamento.component.html',
@@ -19,7 +20,7 @@ export class AgendamentoComponent implements OnInit {
     '19:15:00', '19:30:00', '19:45:00', '20:00:00'
   ]
 
-  constructor(private agendamentoService: AgendamentoService) {}
+  constructor(private agendamentoService: AgendamentoService, private modalService: ModalService) {}
 
   ngOnInit(): void {
     this.atualizarListagem();
@@ -45,4 +46,15 @@ export class AgendamentoComponent implements OnInit {
     return this.agendamentos.some(agenda => agenda.hora === hora);
   }
   
+
+  abrirMeuModal(): void {
+    // Aqui você pode passar os dados que deseja enviar para o modal
+    const data = {
+      titulo: 'Título do Modal',
+      mensagem: 'Esta é uma mensagem para o modal.'
+    };
+  
+    // Chama o método abrirModal do ModalService e passa os dados
+    this.modalService.abrirModal(data);
+}
 }
