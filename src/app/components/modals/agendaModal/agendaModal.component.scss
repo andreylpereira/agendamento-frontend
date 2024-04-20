@@ -1,3 +1,7 @@
 :host {
   display: block;
+
+  .disabled {
+    background-color: #c0c0c0be;
+  }
 }

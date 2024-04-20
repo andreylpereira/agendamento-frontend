@@ -1,10 +1,76 @@
-<h1>REAGENDAR</h1>
-<p>Conteudo</p>
-{{ data.dados.id }}
-{{ data.dados.data }}
-{{ data.dados.hora }}
-{{ data.dados.titulo }}
-{{ data.dados.observacao }}
-{{ data.dados.inicioAtendimento }}
-{{ data.dados.fimAtendimento }}
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis numquam natus dolor iure quos accusamus ex illo enim sapiente! Incidunt recusandae non voluptate nam autem quisquam? Illum necessitatibus tenetur consequatur.
+<div>
+  <h4 class="font-weight-bold text-center">ATUALIZAR AGENDAMENTO</h4>
+  <form [formGroup]="reagendarForm" (ngSubmit)="reagendar()">
+    <div class="form-group">
+      <label for="data">Data</label>
+      <input
+        type="date"
+        class="form-control"
+        id="data"
+        formControlName="data"
+      />
+    </div>
+    <div class="form-group">
+      <label for="hora">Hora</label>
+      <input
+        type="time"
+        class="form-control"
+        id="hora"
+        formControlName="hora"
+      />
+    </div>
+    <div class="form-group">
+      <label for="titulo">Título</label>
+      <input
+        type="text"
+        class="form-control"
+        id="titulo"
+        formControlName="titulo"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="contato">Contato</label>
+      <input
+        type="text"
+        class="form-control"
+        id="contato"
+        formControlName="contato"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="hora">Inicio</label>
+      <input
+        type="time"
+        class="form-control"
+        id="hora"
+        formControlName="hora"
+      />
+    </div>
+    <div class="form-group">
+      <label for="hora">Fim</label>
+      <input
+        type="time"
+        class="form-control"
+        id="hora"
+        formControlName="hora"
+      />
+    </div>
+    <div class="form-group">
+      <label for="observacao">Observação</label>
+      <textarea
+        class="form-control"
+        id="observacao"
+        formControlName="observacao"
+      ></textarea>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-success btn-block font-weight-bold mt-1 rounded shadow"
+    >
+      ATUALIZAR
+    </button>
+  </form>
+</div>

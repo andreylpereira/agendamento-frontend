@@ -1,14 +1,61 @@
-<h1>AGENDA</h1>
-<p>Conteudo</p>
-{{ data.dados.id }}
-{{ data.dados.data }}
-{{ data.dados.hora }}
-{{ data.dados.titulo }}
-{{ data.dados.observacao }}
-{{ data.dados.inicioAtendimento }}
-{{ data.dados.fimAtendimento }}
-<br>
-<br>
-
-
-<button (click)="reagendarModal(data.dados)">REAGENDAR</button>
+<h4 class="font-weight-bold text-center">INFORMAÇÕES AGENDAMENTO</h4>
+<form [formGroup]="agendaForm">
+  <div class="form-group">
+    <label for="data">Data</label>
+    <input type="date" class="form-control disabled" id="data" formControlName="data" />
+  </div>
+  <div class="form-group">
+    <label for="hora">Hora</label>
+    <input type="time" class="form-control disabled" id="hora" formControlName="hora" />
+  </div>
+  <div class="form-group">
+    <label for="titulo">Título</label>
+    <input
+      type="text"
+      class="form-control disabled"
+      id="titulo"
+      formControlName="titulo"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <label for="contato">Contato</label>
+    <input
+      type="text"
+      class="form-control disabled"
+      id="contato"
+      formControlName="contato"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <label for="hora">Inicio</label>
+    <input type="time" class="form-control disabled" id="hora" formControlName="hora" />
+  </div>
+  <div class="form-group">
+    <label for="hora">Fim</label>
+    <input type="time" class="form-control disabled" id="hora" formControlName="hora" />
+  </div>
+  <div class="form-group">
+    <label for="observacao">Observação</label>
+    <textarea
+      class="form-control disabled"
+      id="observacao"
+      formControlName="observacao"
+    ></textarea>
+  </div>
+  <button
+    type="submit"
+    class="btn btn-success btn-block font-weight-bold mt-4 rounded shadow"
+    (click)="reagendarModal(data.dados)"
+  >
+    REAGENDAR
+  </button>
+  <button
+    type="submit"
+    class="btn btn-danger btn-block font-weight-bold mt-1 rounded shadow"
+    (click)="desagendar()"
+  >
+    DESAGENDAR
+  </button>
+</form>

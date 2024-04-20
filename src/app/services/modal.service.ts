@@ -28,7 +28,9 @@ export class ModalService {
   }
 
   agendaModal(referencia: string, dados: Agendamento): void {
-    const dialogRef = this.dialog.open(GenericoModalComponent, {
+    const dialogRef = this.dialog.open(GenericoModalComponent, {      position: {
+      top: '60px',
+    },
       width: '400px',
       data: { referencia, dados },
     });

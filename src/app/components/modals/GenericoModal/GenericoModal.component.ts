@@ -16,6 +16,7 @@ export class GenericoModalComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.dados = data;
+    this.fecharModal = this.fecharModal.bind(this);
   }
 
   fecharModal(): void {
