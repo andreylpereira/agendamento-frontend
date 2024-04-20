@@ -19,6 +19,10 @@ import { HoraFormatadaPipe } from './pipes/HoraFormatadaPipe';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { GenericoModalComponent } from './components/modals/GenericoModal/GenericoModal.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AgendarModalComponent } from './components/modals/agendarModal/agendarModal.component';
+import { ReagendarModalComponent } from './components/modals/reagendarModal/reagendarModal.component';
+import { AgendaModalComponent } from './components/modals/agendaModal/agendaModal.component';
+
 
 registerLocaleData(localePT);
 
@@ -29,7 +33,10 @@ registerLocaleData(localePT);
     AgendamentoComponent,
     HoraFormatadaPipe,
     NavbarComponent,
-    GenericoModalComponent
+    GenericoModalComponent,
+    AgendarModalComponent,
+    ReagendarModalComponent,
+    AgendaModalComponent,
   ],
   imports: [
     BrowserModule,

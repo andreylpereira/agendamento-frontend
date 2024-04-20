@@ -1,27 +1,55 @@
 :host {
   display: block;
-    // background-color: red;
-    height: 100vh;
+  height: 100vh;
+
+  .cursor-pointer {
+    cursor: pointer;
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
 }
-  hr {
-    border: none;
-    height: 1px;
-  }
 
-  .hora {
-    font-size: 1.5em;
-    text-align: center;
-  }
+::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
+    border-radius: 8px;
+}
 
-  .underline {
-    border: none;
-    height: 1px;
-    margin: 12px;
-    background-color: rgba(199, 199, 199, 0.50);
-  }
-  .scrolling {
-    overflow-y: auto;
-    height: 45vh;
-    position: relative;
-    // overflow-x: hidden;
+::-webkit-scrollbar-thumb {
+    background-color: #cccccc;
+    border-radius: 8px;
+    border: 1px solid #cacaca;
+}
+
+}
+hr {
+  border: none;
+  height: 1px;
+}
+
+.hora {
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.underline {
+  border: none;
+  height: 1px;
+  margin: 12px;
+  background-color: rgba(199, 199, 199, 0.5);
+}
+.scrolling {
+  overflow-y: auto;
+  height: 45vh;
+  position: relative;
+}
+
+.alert {
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.disponivel {
+  font-weight: 300;
+  font-size: 14px;
 }

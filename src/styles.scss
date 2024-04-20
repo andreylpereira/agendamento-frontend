@@ -14,7 +14,7 @@ $ember: #ff9900;
 $ember-hover: #cc6600;
 $ember-focus: rgba(255, 153, 0, 0.5);
 $ember-disabled: #ffc266;
-
+$lightgrey: rgba(200, 200, 200, 0.795);
 
 .form-text {
   font-style: italic;
@@ -63,4 +63,12 @@ $ember-disabled: #ffc266;
 
 .arrow::before {
   border-top-color: #333;
+}
+
+.bg-lightgrey {
+  background-color: $lightgrey;
+}
+
+.text-shadow {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }

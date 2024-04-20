@@ -9,10 +9,14 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class GenericoModalComponent {
 
+  dados: any;
+
   constructor(
     public dialogRef: MatDialogRef<GenericoModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) { }
+  ) {
+    this.dados = data;
+  }
 
   fecharModal(): void {
     this.dialogRef.close();

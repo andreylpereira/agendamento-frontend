@@ -1,3 +1,10 @@
-<h1>Titulo</h1>
-<p>Conteudo</p>
+<div *ngIf='data.referencia === "adicionar"'>
+<app-agendar-modal [data]="data"></app-agendar-modal>
+</div>
+<div *ngIf='data.referencia === "agenda"'>
+  <app-agenda-modal [data]="data"></app-agenda-modal>
+  </div>
+  <div *ngIf='data.referencia === "reagendar"'>
+    <app-reagendar-modal [data]="data"></app-reagendar-modal>
+    </div>
 <button mat-button (click)="fecharModal()">Fechar</button>
