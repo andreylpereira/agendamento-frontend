@@ -35,7 +35,7 @@
               <div *ngIf="temAgendamento(hora); else disponivel">
                 <div class="" *ngFor="let agenda of agendamentos">
                   <ng-container *ngIf="hora === agenda.hora">
-                    <a href="#" class="alert d-block text-center text-light p-0 mb-1 cursor-pointer shadow" [style.background-color]="cores[agenda.id % cores.length]" (click)="agendaModal('agenda', agenda)">
+                    <a class="alert d-block text-center text-light p-0 mb-1 cursor-pointer shadow" [style.background-color]="cores[agenda.id % cores.length]" (click)="agendaModal('agenda', agenda)">
                       {{ agenda.id }} - {{ agenda.titulo }}
                     </a>
                   </ng-container>
