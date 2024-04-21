@@ -60,6 +60,7 @@ export class ReagendarModalComponent {
     '19:45:00',
     '20:00:00',
   ];
+  isvalid: boolean = false;
 
   constructor(private fb: FormBuilder) {
     this.reagendarForm = this.fb.group({
@@ -78,8 +79,24 @@ export class ReagendarModalComponent {
     this.reagendarForm.patchValue(this.data.dados);
   }
 
+  exists (hours: Array<string>, hour: string) {
+    for (let i = 0; i < hours.length; i++) {
+      if (hours[i] == hour) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+
   reagendar() {
-    if (this.reagendarForm.valid) {
+  this.isvalid = this.exists(this.horas, this.reagendarForm?.get("hora")?.value);
+
+
+    if (this.isvalid == false) {
+      console.log("Tratar que não foi possível pois ão está no intervalo de 15 em 15 minutos");
+
+    } else if (this.reagendarForm.valid && this.isvalid == true) {
       const formData = this.reagendarForm.value;
       console.log(formData);
       this.fecharModal();
