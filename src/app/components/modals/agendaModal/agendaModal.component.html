@@ -10,23 +10,11 @@
   </div>
   <div class="form-group">
     <label for="titulo">Título</label>
-    <input
-      type="text"
-      class="form-control disabled"
-      id="titulo"
-      formControlName="titulo"
-      required
-    />
+    <input type="text" class="form-control disabled" id="titulo" formControlName="titulo" required />
   </div>
   <div class="form-group">
     <label for="contato">Contato</label>
-    <input
-      type="text"
-      class="form-control disabled"
-      id="contato"
-      formControlName="contato"
-      required
-    />
+    <input type="text" class="form-control disabled" id="contato" formControlName="contato" required />
   </div>
   <div class="form-group">
     <label for="hora">Inicio</label>
@@ -38,24 +26,14 @@
   </div>
   <div class="form-group">
     <label for="observacao">Observação</label>
-    <textarea
-      class="form-control disabled"
-      id="observacao"
-      formControlName="observacao"
-    ></textarea>
+    <textarea class="form-control disabled" id="observacao" formControlName="observacao"></textarea>
   </div>
-  <button
-    type="submit"
-    class="btn btn-success btn-block font-weight-bold mt-4 rounded shadow"
-    (click)="reagendarModal(data.dados)"
-  >
+  <button type="submit" class="btn btn-success btn-block font-weight-bold mt-4 rounded shadow"
+    (click)="reagendarModal(data.dados)">
     REAGENDAR
   </button>
-  <button
-    type="submit"
-    class="btn btn-danger btn-block font-weight-bold mt-1 rounded shadow"
-    (click)="desagendar()"
-  >
+  <button type="submit" class="btn btn-danger btn-block font-weight-bold mt-1 rounded shadow"
+    (click)="desagendar(data.dados.id)">
     DESAGENDAR
   </button>
 </form>

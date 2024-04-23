@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { AgendamentoService } from 'src/app/services/agendamento.service';
 
 @Component({
   selector: 'app-reagendar-modal',
@@ -62,7 +64,8 @@ export class ReagendarModalComponent {
   ];
   isvalid: boolean = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private agendamentoService: AgendamentoService,
+    private toastr: ToastrService) {
     this.reagendarForm = this.fb.group({
       id: [Validators.required],
       data: [Validators.required],
@@ -79,7 +82,7 @@ export class ReagendarModalComponent {
     this.reagendarForm.patchValue(this.data.dados);
   }
 
-  exists (hours: Array<string>, hour: string) {
+  isEquals(hours: Array<string>, hour: string) {
     for (let i = 0; i < hours.length; i++) {
       if (hours[i] == hour) {
         return true;
@@ -90,18 +93,16 @@ export class ReagendarModalComponent {
 
 
   reagendar() {
-  this.isvalid = this.exists(this.horas, this.reagendarForm?.get("hora")?.value);
+    this.isvalid = this.isEquals(this.horas, this.reagendarForm?.get("hora")?.value);
 
-
-    if (this.isvalid == false) {
-      console.log("Tratar que não foi possível pois ão está no intervalo de 15 em 15 minutos");
-
-    } else if (this.reagendarForm.valid && this.isvalid == true) {
+    if (this.reagendarForm.valid && this.isvalid == true) {
       const formData = this.reagendarForm.value;
-      console.log(formData);
+      this.agendamentoService.updateAgendamento(formData, formData.id)
       this.fecharModal();
     } else {
-      // tratar invalidos
+      this.toastr.error('Logout efetuado com sucesso.', 'Sucesso!', {
+        timeOut: 2000,
+      })
     }
   }
 
