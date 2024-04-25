@@ -6,8 +6,22 @@
                   <div class="card-header">
                       <div class="card-body">
                           <form [formGroup]="loginForm">
-                              <div class="text-center mb-3">
-                                  <img src="../../../assets/user.svg" alt="Logo" width="150" height="150">
+                              <div class="text-center mb-3"><svg
+                                id="user-svg"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="150"
+                                height="150"
+                                viewBox="0 0 24 24"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              >
+                                <path
+                                  d="M12 14a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0 2c-2.67 0-8 1.337-8 4v2h16v-2c0-2.663-5.33-4-8-4z"
+                                />
+                              </svg>
+                              
+                                  <!-- <img src="../../../assets/user.svg" alt="Logo" width="150" height="150"> -->
                               </div>
                               <div class="form-group">
                                   <label for="login" class="font-weight-bold">Login</label>

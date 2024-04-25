@@ -1,8 +1,5 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
-/* You can add global styles to this file, and also import other style files */
-// <uniquifier>: Use a unique and descriptive class name
-// <weight>: Use a value from 300 to 800
 * {
   font-family: "Open Sans", sans-serif;
   font-optical-sizing: auto;
@@ -26,6 +23,11 @@ $lightgrey: rgba(200, 200, 200, 0.795);
   font-style: italic;
 }
 
+#user-svg {
+  fill: $color-main;
+  stroke: $color-main;
+}
+
 .bg-main {
   background-image: $bg-main;
 }
@@ -37,7 +39,6 @@ $lightgrey: rgba(200, 200, 200, 0.795);
   background-color: $bg-darkblue;
 }
 
-/* Estilos do Botão */
 .btn {
   transition: all 0.3s ease;
 }
@@ -69,7 +70,6 @@ $lightgrey: rgba(200, 200, 200, 0.795);
   border-color: $color-main-disabled;
 }
 
-/* Estilos tooltip */
 .tooltip-inner {
   background-color: #333;
   color: #fff;
@@ -89,7 +89,6 @@ $lightgrey: rgba(200, 200, 200, 0.795);
 .text-shadow {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
-
 
 .navbar-brand svg:hover {
   fill: rgb(176, 176, 199); /* Altere para a cor desejada */

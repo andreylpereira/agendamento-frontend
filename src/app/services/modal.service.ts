@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GenericoModalComponent } from '../components/modals/GenericoModal/GenericoModal.component';
 import Agendamento from '../models/agendamento.model';
+import { AgendamentoComponent } from '../pages/agendamento/agendamento.component';
 
 @Injectable({
   providedIn: 'root',
@@ -12,11 +13,12 @@ export class ModalService {
   agendarModal(
     referencia: string,
     dataSelecionada?: string,
-    hora?: string
+    hora?: string,
+    agendamentoComponent?: AgendamentoComponent
   ): void {
     const dialogRef = this.dialog.open(GenericoModalComponent, {
       width: '400px',
-      data: { referencia, dataSelecionada, hora },
+      data: { referencia, dataSelecionada, hora, agendamentoComponent },
     });
   }
 

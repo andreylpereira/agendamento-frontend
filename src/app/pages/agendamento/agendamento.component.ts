@@ -94,11 +94,12 @@ export class AgendamentoComponent implements OnInit {
   agendarModal(
     referencia: string,
     dataSelecionada?: string,
-    hora?: string
+    hora?: string,
+    agendamentoComponent?: AgendamentoComponent
   ): void {
     if (referencia === 'adicionar') {
       //const data = { dataSelecionada, hora };
-      this.modalService.agendarModal(referencia, dataSelecionada, hora);
+      this.modalService.agendarModal(referencia, dataSelecionada, hora, agendamentoComponent);
     }
   }
 

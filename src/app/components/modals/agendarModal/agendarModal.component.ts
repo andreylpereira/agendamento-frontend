@@ -38,13 +38,17 @@ export class AgendarModalComponent {
 
   agendar() {
     const userId = this.loginService.getUser();
+    
     if (this.agendarForm.valid && userId) {
       const formData = this.agendarForm.value;
       formData.data = this.data.dataSelecionada;
       formData.hora = this.data.hora;
+
       this.agendamentoService.addAgendamento(formData, userId?.id);
       //this.agendamento.AtualizarPosAcao();
+      
       this.fecharModal();
+      this.data.agendamentoComponent.atualizarListagem();
     }
   }
 
