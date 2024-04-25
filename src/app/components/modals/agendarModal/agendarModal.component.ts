@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AgendamentoService } from 'src/app/services/agendamento.service';
 import { LoginService } from 'src/app/services/login.service';
@@ -20,8 +20,8 @@ export class AgendarModalComponent {
       titulo: ['', Validators.required],
       observacao: ['', Validators.required],
       contato: ['', Validators.required],
-      inicioAtendimento: [''],
-      fimAtendimento: [''],
+      inicioAtendimento: ['00:00:00'],
+      fimAtendimento: ['00:00:00'],
     });
   }
 

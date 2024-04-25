@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { Injectable } from "@angular/core";
+import { CanActivate, Router } from "@angular/router";
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Injectable({
   providedIn: 'root',
@@ -13,9 +13,9 @@ export class AuthGuardService implements CanActivate {
     const data = JSON.parse(session);
 
     if (data) {
-      const token = data.acessToken;
+      const token = data.token;
 
-      if (typeof token == 'string') {
+      if (typeof token === 'string') {
         return !this.jwtHelper.isTokenExpired(token);
       }
       return false;

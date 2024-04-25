@@ -9,28 +9,37 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AgendamentoService {
 
-  private url = 'assets/mocks/data.json';
-  //http://localhost:8888
+  private url = 'http://localhost:8888/api';
+  //  assets/mocks/data.json
 
   constructor(private http: HttpClient, private toastr: ToastrService) { }
 
   getAgendamentos(data: string): Observable<Agendamento[]> {
-    return this.http.get<{ agendamento: Agendamento[] }>(this.url).pipe(
-      map(response => response.agendamento.filter(agendamento => agendamento.data === data))
+    return this.http.get<Agendamento[]>(`${this.url}/agenda`).pipe(
+      map(agendamentos => {
+        return agendamentos.filter(agendamento => agendamento.data === data);
+      })
     );
   }
 
   addAgendamento(data: Agendamento, _id: number) {
-
     return this.http
-      .post<Agendamento>(`${this.url}/agenda/${_id}`, data)
+      .post(`${this.url}/agenda/${_id}`, data, { responseType: 'text' })
       .subscribe({
-        next: () => {
-          this.toastr.success("Agendamento efetuado com sucesso!", "ATENÇÃO", {
-            timeOut: 2000,
-          });
+        next: (response) => {
+          if (response === 'Agendamento realizado com sucesso!') {
+            this.toastr.success("Agendamento efetuado com sucesso!", "ATENÇÃO", {
+              timeOut: 2000,
+            });
+          } else {
+            console.error("Resposta inesperada do servidor:", response);
+            this.toastr.error("Erro ao tentar agendar, resposta inesperada do servidor", "ATENÇÃO", {
+              timeOut: 2000,
+            });
+          }
         },
-        error: () => {
+        error: (error) => {
+          console.error("Erro ao tentar agendar:", error);
           this.toastr.error("Erro ao tentar agendar, favor tente novamente!", "ATENÇÃO", {
             timeOut: 2000,
           });
@@ -38,9 +47,11 @@ export class AgendamentoService {
       });
   }
 
+
+
   updateAgendamento(data: Agendamento, _id: number) {
     return this.http
-      .put<Agendamento>(`${this.url}/agenda/${_id}`, data)
+      .put(`${this.url}/agenda/${_id}`, data, { responseType: 'text' })
       .subscribe({
         next: () => {
           this.toastr.success("Agendamento atualizado com sucesso!", "ATENÇÃO", {
@@ -57,7 +68,7 @@ export class AgendamentoService {
 
   deleteAgendamento(_id: number) {
     return this.http
-      .delete<any>(`${this.url}/agenda/${_id}`)
+      .delete(`${this.url}/agenda/${_id}`, { responseType: 'text' })
       .subscribe({
         next: () => {
           this.toastr.success("Agendamento atualizado com sucesso!", "ATENÇÃO", {
