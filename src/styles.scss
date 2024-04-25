@@ -10,23 +10,31 @@
 }
 
 /* Variaveis */
-$ember: #ff9900;
-$ember-hover: #cc6600;
-$ember-focus: rgba(255, 153, 0, 0.5);
-$ember-disabled: #ffc266;
+$bg-main: linear-gradient(to bottom, #2ecc71, #3498db);
+$bg-alternate: linear-gradient(to top,#2ecc71, #3498db);
+$bg-darkblue: #3498db;
+$color-main: #2ecc71;
+$color-main-hover: darken($color-main, 10%);
+$color-main-focus: lighten($color-main, 10%);
+$color-main-disabled: #ccc;
+$color-alternate: #3498db;
+$color-alternate-hover: darken($color-alternate, 10%);
+$color-alternate-focus: lighten($color-alternate, 10%);
 $lightgrey: rgba(200, 200, 200, 0.795);
 
 .form-text {
   font-style: italic;
 }
 
-.bg-ember {
-  background-color: $ember;
+.bg-main {
+  background-image: $bg-main;
+}
+.bg-alternate {
+  background-image: $bg-alternate;
 }
 
-.navbar-ember {
-  color: aliceblue;
-  background-color: $ember;
+.bg-darkblue {
+  background-color: $bg-darkblue;
 }
 
 /* Estilos do Botão */
@@ -39,26 +47,26 @@ $lightgrey: rgba(200, 200, 200, 0.795);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.btn-ember {
+.btn-color-main {
   color: aliceblue;
-  background-color: $ember;
-  border-color: $ember;
+  background: #2ecc71;
+  border-color: #2ecc71;
 }
 
-.btn-ember:hover {
-  background-color: $ember-hover;
-  border-color: $ember-hover;
+.btn-color-main:hover {
+  background-color: $color-main-hover;
+  border-color: $color-main-hover;
 }
 
-.btn-ember:focus,
-.btn-ember.focus {
-  box-shadow: 0 0 0 0.2rem $ember-focus;
+.btn-color-main:focus,
+.btn-color-main.focus {
+  box-shadow: 0 0 0 0.2rem $color-main-focus;
 }
 
-.btn-ember.disabled,
-.btn-ember:disabled {
-  background-color: $ember-disabled;
-  border-color: $ember-disabled;
+.btn-color-main.disabled,
+.btn-color-main:disabled {
+  background-color: $color-main-disabled;
+  border-color: $color-main-disabled;
 }
 
 /* Estilos tooltip */
@@ -80,4 +88,10 @@ $lightgrey: rgba(200, 200, 200, 0.795);
 
 .text-shadow {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+
+.navbar-brand svg:hover {
+  fill: rgb(176, 176, 199); /* Altere para a cor desejada */
+  transition: fill 0.3s ease; /* Efeito de transição */
 }

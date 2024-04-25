@@ -107,4 +107,8 @@ export class AgendamentoComponent implements OnInit {
       this.modalService.agendaModal(referencia, agenda);
     }
   }
+
+  AtualizarPosAcao(): void {
+    this.atualizarListagem();
+  }
 }

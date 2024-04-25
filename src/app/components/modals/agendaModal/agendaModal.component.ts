@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import Agendamento from 'src/app/models/agendamento.model';
+import { AgendamentoComponent } from 'src/app/pages/agendamento/agendamento.component';
 import { AgendamentoService } from 'src/app/services/agendamento.service';
 import { ModalService } from 'src/app/services/modal.service';
 
@@ -15,7 +16,7 @@ export class AgendaModalComponent {
   closedModal!: Function;
   agendaForm!: FormGroup;
 
-  constructor(private modalService: ModalService, private fb: FormBuilder, private agendamentoService: AgendamentoService) {
+  constructor(private modalService: ModalService, private fb: FormBuilder, private agendamentoService: AgendamentoService, private agendamento: AgendamentoComponent) {
     this.agendaForm = this.fb.group({
       id: [{ value: '', disabled: true }],
       data: [{ value: '', disabled: true }],
@@ -43,6 +44,7 @@ export class AgendaModalComponent {
 
   desagendar(_id: number) {
     this.agendamentoService.deleteAgendamento(_id);
+    this.agendamento.AtualizarPosAcao();
     this.closedModal();
   }
 }

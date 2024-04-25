@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AgendamentoComponent } from 'src/app/pages/agendamento/agendamento.component';
 import { AgendamentoService } from 'src/app/services/agendamento.service';
 import { LoginService } from 'src/app/services/login.service';
 
@@ -13,7 +14,10 @@ export class AgendarModalComponent {
   @Input() closedModal!: Function;
   agendarForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private agendamentoService: AgendamentoService, private loginService: LoginService) {
+  constructor(private fb: FormBuilder, private agendamentoService: AgendamentoService, 
+    private loginService: LoginService, 
+    //private agendamento: AgendamentoComponent
+  ) {
     this.agendarForm = this.fb.group({
       data: [{ value: '', disabled: true }, Validators.required],
       hora: [{ value: '', disabled: true }, Validators.required],
@@ -39,6 +43,7 @@ export class AgendarModalComponent {
       formData.data = this.data.dataSelecionada;
       formData.hora = this.data.hora;
       this.agendamentoService.addAgendamento(formData, userId?.id);
+      //this.agendamento.AtualizarPosAcao();
       this.fecharModal();
     }
   }

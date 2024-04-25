@@ -1,4 +1,5 @@
-<app-navbar></app-navbar>
+<html class="bg-main">
+  <app-navbar></app-navbar>
 <main style="height: 100vh; display: flex; align-items: center">
   <div class="card shadow container">
     <div class="card-body">
@@ -10,7 +11,7 @@
         </div>
         <div class="row">
           <div class="col">
-            <hr class="w-25 my-2 bg-ember" />
+            <hr class="w-25 my-2 bg-main" />
           </div>
         </div>
         <div>
@@ -38,13 +39,13 @@
             />
           </div>
         </div>
-        <hr class="w-100 my-2 bg-secondary" />
+        <hr class="w-100 my-2 bg-alternate" />
         <div class="scrolling">
           <div class="row container-fluid mb-2" *ngFor="let hora of horas">
             <div class="col-md-2 order-md-1 order-1 mb-3 mt-2 mb-md-0">
               <button
                 type="button"
-                class="btn bold btn-ember btn-lg btn-block shadow font-weight-bold"
+                class="btn bold btn-color-main btn-lg btn-block shadow font-weight-bold"
                 data-toggle="tooltip"
                 title="Clique para agendar uma entrega para {{
                   hora | horaFormatada
@@ -81,7 +82,9 @@
           </div>
         </div>
       </div>
-      <hr class="w-100 my-2 bg-secondary" />
+      <hr class="w-100 my-2 bg-main" />
     </div>
   </div>
 </main>
+
+</html>
