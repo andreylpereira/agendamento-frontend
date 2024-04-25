@@ -109,7 +109,5 @@ export class AgendamentoComponent implements OnInit {
     }
   }
 
-  AtualizarPosAcao(): void {
-    this.atualizarListagem();
-  }
+
 }

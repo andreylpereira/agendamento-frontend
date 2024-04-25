@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { AgendamentoComponent } from 'src/app/pages/agendamento/agendamento.component';
 import { AgendamentoService } from 'src/app/services/agendamento.service';
 
 @Component({
@@ -66,7 +65,7 @@ export class ReagendarModalComponent {
   isvalid: boolean = false;
 
   constructor(private fb: FormBuilder, private agendamentoService: AgendamentoService,
-    private toastr: ToastrService, private agendamento: AgendamentoComponent) {
+    private toastr: ToastrService) {
     this.reagendarForm = this.fb.group({
       id: [Validators.required],
       data: [Validators.required],
@@ -99,7 +98,6 @@ export class ReagendarModalComponent {
     if (this.reagendarForm.valid && this.isvalid == true) {
       const formData = this.reagendarForm.value;
       this.agendamentoService.updateAgendamento(formData, formData.id);
-      this.agendamento.AtualizarPosAcao();
       this.fecharModal();
     } else {
       this.toastr.error('Logout efetuado com sucesso.', 'Sucesso!', {
