@@ -14,12 +14,8 @@ export class AgendamentoService {
 
   constructor(private http: HttpClient, private toastr: ToastrService) { }
 
-  getAgendamentos(data: string): Observable<Agendamento[]> {
-    return this.http.get<Agendamento[]>(`${this.url}/agenda`).pipe(
-      map(agendamentos => {
-        return agendamentos.filter(agendamento => agendamento.data === data);
-      })
-    );
+  getAgendamentos(): Observable<Agendamento[]> {
+    return this.http.get<Agendamento[]>(`${this.url}/agenda`);
   }
 
   addAgendamento(data: Agendamento, _id: number) {

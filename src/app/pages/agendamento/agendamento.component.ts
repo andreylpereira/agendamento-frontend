@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, map, of } from 'rxjs';
 import Agendamento from 'src/app/models/agendamento.model';
 import { AgendamentoService } from 'src/app/services/agendamento.service';
 import { ModalService } from 'src/app/services/modal.service';
@@ -9,7 +10,7 @@ import { ModalService } from 'src/app/services/modal.service';
 })
 export class AgendamentoComponent implements OnInit {
   dataSelecionada: string = new Date().toISOString().split('T')[0];
-  agendamentos: Agendamento[] = [];
+  agendamentos$!: Observable<Agendamento[]>;
   horas: any = [
     '08:00:00',
     '08:15:00',
@@ -73,12 +74,12 @@ export class AgendamentoComponent implements OnInit {
   }
 
   atualizarListagem(): void {
-    this.agendamentoService.getAgendamentos(this.dataSelecionada).subscribe(
+    this.agendamentoService.getAgendamentos().subscribe(
       (data: Agendamento[]) => {
         if (data && data.length > 0) {
-          this.agendamentos = data;
+          this.agendamentos$ = of(data.filter(agendamento => agendamento.data === this.dataSelecionada));
         } else {
-          this.agendamentos = [];
+          this.agendamentos$ = of([]);
         }
       },
       (error) => {
@@ -87,10 +88,12 @@ export class AgendamentoComponent implements OnInit {
     );
   }
 
-  temAgendamento(hora: string): boolean {
-    return this.agendamentos.some((agenda) => agenda.hora === hora);
+  temAgendamento(hora: string): Observable<boolean> {
+    return this.agendamentos$.pipe(
+      map((agendamentos: any[]) => agendamentos.some(agenda => agenda.hora === hora))
+    );
   }
-
+  
   agendarModal(
     referencia: string,
     dataSelecionada?: string,
