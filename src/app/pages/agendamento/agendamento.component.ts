@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, map, of } from 'rxjs';
+import { Observable, filter, map, of } from 'rxjs';
+import { selectAgendamentos } from 'src/app/_store/agendamento.selectors';
 import Agendamento from 'src/app/models/agendamento.model';
 import { AgendamentoService } from 'src/app/services/agendamento.service';
 import { ModalService } from 'src/app/services/modal.service';
+import { Store } from '@ngrx/store';
+import { retrievedAgendamentoList } from 'src/app/_store/agendamento.action';
 @Component({
   selector: 'agendamento',
   templateUrl: './agendamento.component.html',
@@ -10,7 +13,7 @@ import { ModalService } from 'src/app/services/modal.service';
 })
 export class AgendamentoComponent implements OnInit {
   dataSelecionada: string = new Date().toISOString().split('T')[0];
-  agendamentos$!: Observable<Agendamento[]>;
+  agendamentos$ = this.store.select(selectAgendamentos);
   horas: any = [
     '08:00:00',
     '08:15:00',
@@ -66,7 +69,8 @@ export class AgendamentoComponent implements OnInit {
 
   constructor(
     private agendamentoService: AgendamentoService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
@@ -74,15 +78,15 @@ export class AgendamentoComponent implements OnInit {
   }
 
   atualizarListagem(): void {
-    this.agendamentoService.getAgendamentos().subscribe(
-      (data: Agendamento[]) => {
-        if (data && data.length > 0) {
-          this.agendamentos$ = of(data.filter(agendamento => agendamento.data === this.dataSelecionada));
-        } else {
-          this.agendamentos$ = of([]);
-        }
+    this.agendamentoService.getAgendamentos().pipe(
+      filter((agendamentos: Agendamento[]) => 
+        agendamentos.some(agendamento => agendamento.data === this.dataSelecionada)
+      )
+    ).subscribe(
+      (agendamentosFiltrados: Agendamento[]) => {
+        this.store.dispatch(retrievedAgendamentoList({ agendamentos: agendamentosFiltrados }));
       },
-      (error) => {
+      (error: any) => {
         console.error('Erro ao carregar os agendamentos:', error);
       }
     );

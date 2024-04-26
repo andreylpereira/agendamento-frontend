@@ -22,6 +22,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AgendarModalComponent } from './components/modals/agendarModal/agendarModal.component';
 import { ReagendarModalComponent } from './components/modals/reagendarModal/reagendarModal.component';
 import { AgendaModalComponent } from './components/modals/agendaModal/agendaModal.component';
+import { StoreModule } from '@ngrx/store';
+import { agendamentosReducer } from './_store/agendamento.reducer';
 
 
 registerLocaleData(localePT);
@@ -46,7 +48,8 @@ registerLocaleData(localePT);
     FormsModule,
     HttpClientModule,
     MatDialogModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    StoreModule.forRoot({ agendamentos: agendamentosReducer }),
   ],
   exports: [HoraFormatadaPipe],
   providers: [

@@ -59,7 +59,7 @@
               class="col-md-10 order-md-2 order-2 p-0 mt-2 container text-center"
             >
               <div *ngIf="temAgendamento(hora); else disponivel">
-                <div class="" *ngFor="let agenda of agendamentos">
+                <div class="" *ngFor="let agenda of (agendamentos$ | async);">
                   <ng-container *ngIf="hora === agenda.hora">
                     <a
                       class="alert d-block text-center text-light p-0 mb-1 cursor-pointer rounded-pill shadow"
