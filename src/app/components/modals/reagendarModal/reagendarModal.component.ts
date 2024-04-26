@@ -64,8 +64,11 @@ export class ReagendarModalComponent {
   ];
   isvalid: boolean = false;
 
-  constructor(private fb: FormBuilder, private agendamentoService: AgendamentoService,
-    private toastr: ToastrService) {
+  constructor(
+    private fb: FormBuilder,
+    private agendamentoService: AgendamentoService,
+    private toastr: ToastrService
+  ) {
     this.reagendarForm = this.fb.group({
       id: [Validators.required],
       data: [Validators.required],
@@ -91,18 +94,19 @@ export class ReagendarModalComponent {
     return false;
   }
 
-
   reagendar() {
-    this.isvalid = this.isEquals(this.horas, this.reagendarForm?.get("hora")?.value);
+    if (this.reagendarForm.valid) {
+      let formData = this.reagendarForm.value;
+      formData.hora += ':00';
 
-    if (this.reagendarForm.valid && this.isvalid == true) {
-      const formData = this.reagendarForm.value;
-      this.agendamentoService.updateAgendamento(formData, formData.id);
-      this.fecharModal();
+      if (this.isEquals(this.horas, formData.hora)) {
+        this.agendamentoService.updateAgendamento(formData, formData.id);
+        this.fecharModal();
+      }
     } else {
       this.toastr.error('Logout efetuado com sucesso.', 'Sucesso!', {
         timeOut: 2000,
-      })
+      });
     }
   }
 

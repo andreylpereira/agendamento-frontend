@@ -35,6 +35,7 @@ export class AgendaModalComponent {
 
   reagendarModal(agenda: Agendamento): void {
     this.modalService.reagendarModal('reagendar', agenda);
+    this.closedModal();
   }
 
   fecharModal() {
