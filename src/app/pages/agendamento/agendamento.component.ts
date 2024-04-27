@@ -20,6 +20,8 @@ export class AgendamentoComponent implements OnInit {
     '08:30:00',
     '08:45:00',
     '09:00:00',
+    '09:15:00',
+    '09:30:00',
     '09:45:00',
     '10:00:00',
     '10:15:00',
@@ -63,9 +65,18 @@ export class AgendamentoComponent implements OnInit {
     '19:45:00',
     '20:00:00',
   ];
-  cores: string[] = ['#2C3E50', '#34495E', '#7F8C8D', '#16A085', '#27AE60', '#2980B9', '#8E44AD', '#2C3E50', '#F39C12', '#D35400'];
-
-
+  cores: string[] = [
+    '#2C3E50',
+    '#34495E',
+    '#7F8C8D',
+    '#16A085',
+    '#27AE60',
+    '#2980B9',
+    '#8E44AD',
+    '#2C3E50',
+    '#F39C12',
+    '#D35400',
+  ];
 
   constructor(
     private agendamentoService: AgendamentoService,
@@ -75,29 +86,46 @@ export class AgendamentoComponent implements OnInit {
 
   ngOnInit(): void {
     this.atualizarListagem();
+    this.atualizarCoresAleatorias();
   }
 
   atualizarListagem(): void {
-    this.agendamentoService.getAgendamentos().pipe(
-      filter((agendamentos: Agendamento[]) => 
-        agendamentos.some(agendamento => agendamento.data === this.dataSelecionada)
+    this.agendamentoService
+      .getAgendamentos()
+      .pipe(
+        map((agendamentos: Agendamento[]) =>
+          agendamentos.filter(
+            (agendamento) => agendamento.data === this.dataSelecionada
+          )
+        )
       )
-    ).subscribe(
-      (agendamentosFiltrados: Agendamento[]) => {
-        this.store.dispatch(retrievedAgendamentoList({ agendamentos: agendamentosFiltrados }));
-      },
-      (error: any) => {
-        console.error('Erro ao carregar os agendamentos:', error);
-      }
-    );
+      .subscribe(
+        (agendamentosFiltrados: Agendamento[]) => {
+          this.store.dispatch(
+            retrievedAgendamentoList({ agendamentos: agendamentosFiltrados })
+          );
+        },
+        (error: any) => {
+          console.error('Erro ao carregar os agendamentos:', error);
+        }
+      );
   }
+
 
   temAgendamento(hora: string): Observable<boolean> {
     return this.agendamentos$.pipe(
-      map((agendamentos: any[]) => agendamentos.some(agenda => agenda.hora === hora))
+      map((agendamentos: any[]) =>
+        agendamentos.some((agenda) => {
+          if (agenda.data === this.dataSelecionada) {
+            return agenda.hora === hora;
+          }
+          return false;
+        })
+      )
     );
   }
-  
+
+
   agendarModal(
     referencia: string,
     dataSelecionada?: string,
@@ -105,8 +133,12 @@ export class AgendamentoComponent implements OnInit {
     agendamentoComponent?: AgendamentoComponent
   ): void {
     if (referencia === 'adicionar') {
-      //const data = { dataSelecionada, hora };
-      this.modalService.agendarModal(referencia, dataSelecionada, hora, agendamentoComponent);
+      this.modalService.agendarModal(
+        referencia,
+        dataSelecionada,
+        hora,
+        agendamentoComponent
+      );
     }
   }
 
@@ -116,5 +148,7 @@ export class AgendamentoComponent implements OnInit {
     }
   }
 
-
+  atualizarCoresAleatorias(): void {
+      this.atualizarListagem();
+  }
 }

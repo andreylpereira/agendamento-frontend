@@ -26,6 +26,7 @@ import { StoreModule } from '@ngrx/store';
 import { agendamentosReducer } from './_store/agendamento.reducer';
 
 
+
 registerLocaleData(localePT);
 
 @NgModule({

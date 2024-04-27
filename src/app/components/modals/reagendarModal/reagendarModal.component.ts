@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
+import { updateAgendamento } from 'src/app/_store/agendamento.action';
 import { AgendamentoService } from 'src/app/services/agendamento.service';
 
 @Component({
@@ -10,8 +12,8 @@ import { AgendamentoService } from 'src/app/services/agendamento.service';
 })
 export class ReagendarModalComponent {
   @Input() data: any;
-  @Input()
-  closedModal!: Function;
+  @Input() closedModal!: Function;
+
   reagendarForm: FormGroup;
   horas: any = [
     '08:00:00',
@@ -67,7 +69,8 @@ export class ReagendarModalComponent {
   constructor(
     private fb: FormBuilder,
     private agendamentoService: AgendamentoService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private store: Store
   ) {
     this.reagendarForm = this.fb.group({
       id: [Validators.required],
@@ -85,24 +88,27 @@ export class ReagendarModalComponent {
     this.reagendarForm.patchValue(this.data.dados);
   }
 
-  isEquals(hours: Array<string>, hour: string) {
-    for (let i = 0; i < hours.length; i++) {
-      if (hours[i] == hour) {
-        return true;
-      }
-    }
-    return false;
+  isEquals(hours: string[], hour: string): boolean {
+    return hours.includes(hour);
   }
 
   reagendar() {
     if (this.reagendarForm.valid) {
       let formData = this.reagendarForm.value;
-      formData.hora += ':00';
+      formData.hora = this.formatarHora(formData.hora);
+      formData.inicioAtendimento = this.formatarHora(
+        formData.inicioAtendimento
+      );
+      formData.fimAtendimento = this.formatarHora(formData.fimAtendimento);
 
       if (this.isEquals(this.horas, formData.hora)) {
-        this.agendamentoService.updateAgendamento(formData, formData.id);
-        this.fecharModal();
-      }
+      this.agendamentoService.updateAgendamento(formData, formData.id);
+
+      this.store.dispatch(
+        updateAgendamento({ id: formData.id, agendamento: formData })
+      );
+      this.fecharModal();
+       }
     } else {
       this.toastr.error('Logout efetuado com sucesso.', 'Sucesso!', {
         timeOut: 2000,
@@ -112,5 +118,20 @@ export class ReagendarModalComponent {
 
   fecharModal() {
     this.closedModal();
+  }
+
+  formatarHora(hora: string) {
+    // Divide a hora em horas, minutos e segundos
+    const partes = hora.split(':');
+
+    // Extrai horas e minutos
+    const horas = partes[0];
+    const minutos = partes[1];
+
+    // Se não houver segundos, adiciona "00"
+    const segundos = partes[2] || '00';
+
+    // Retorna a hora formatada
+    return `${horas}:${minutos}:${segundos}`;
   }
 }

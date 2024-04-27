@@ -1,48 +1,34 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import Agendamento from '../models/agendamento.model';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AgendamentoService {
-
   private url = 'http://localhost:8888/api';
   //  assets/mocks/data.json
 
-  constructor(private http: HttpClient, private toastr: ToastrService) { }
+  constructor(private http: HttpClient, private toastr: ToastrService) {}
 
   getAgendamentos(): Observable<Agendamento[]> {
     return this.http.get<Agendamento[]>(`${this.url}/agenda`);
   }
 
-  addAgendamento(data: Agendamento, _id: number) {
-    return this.http
-      .post(`${this.url}/agenda/${_id}`, data, { responseType: 'text' })
+  addAgendamento(data: any, _id: number, successCallback: (response: any) => void, errorCallback: (error: any) => void) {
+    this.http
+      .post(`${this.url}/agenda/${_id}`, data)
       .subscribe({
         next: (response) => {
-          if (response === 'Agendamento realizado com sucesso!') {
-            this.toastr.success("Agendamento efetuado com sucesso!", "ATENÇÃO", {
-              timeOut: 2000,
-            });
-          } else {
-            console.error("Resposta inesperada do servidor:", response);
-            this.toastr.error("Erro ao tentar agendar, resposta inesperada do servidor", "ATENÇÃO", {
-              timeOut: 2000,
-            });
-          }
+          successCallback(response);
         },
         error: (error) => {
-          console.error("Erro ao tentar agendar:", error);
-          this.toastr.error("Erro ao tentar agendar, favor tente novamente!", "ATENÇÃO", {
-            timeOut: 2000,
-          });
-        },
+          errorCallback(error);
+        }
       });
   }
-
 
 
   updateAgendamento(data: Agendamento, _id: number) {
@@ -50,14 +36,22 @@ export class AgendamentoService {
       .put(`${this.url}/agenda/${_id}`, data, { responseType: 'text' })
       .subscribe({
         next: () => {
-          this.toastr.success("Agendamento atualizado com sucesso!", "ATENÇÃO", {
-            timeOut: 2000,
-          });
+          this.toastr.success(
+            'Agendamento atualizado com sucesso!',
+            'ATENÇÃO',
+            {
+              timeOut: 2000,
+            }
+          );
         },
         error: () => {
-          this.toastr.error("Erro ao tentar atualizar, favor tente novamente!", "ATENÇÃO", {
-            timeOut: 2000,
-          });
+          this.toastr.error(
+            'Erro ao tentar atualizar, favor tente novamente!',
+            'ATENÇÃO',
+            {
+              timeOut: 2000,
+            }
+          );
         },
       });
   }
@@ -67,14 +61,22 @@ export class AgendamentoService {
       .delete(`${this.url}/agenda/${_id}`, { responseType: 'text' })
       .subscribe({
         next: () => {
-          this.toastr.success("Agendamento atualizado com sucesso!", "ATENÇÃO", {
-            timeOut: 2000,
-          });
+          this.toastr.success(
+            'Agendamento excluído com sucesso!',
+            'ATENÇÃO',
+            {
+              timeOut: 2000,
+            }
+          );
         },
         error: () => {
-          this.toastr.error("Erro ao tentar atualizar, favor tente novamente!", "ATENÇÃO", {
-            timeOut: 2000,
-          });
+          this.toastr.error(
+            'Erro ao tentar excluído, favor tente novamente!',
+            'ATENÇÃO',
+            {
+              timeOut: 2000,
+            }
+          );
         },
       });
   }
