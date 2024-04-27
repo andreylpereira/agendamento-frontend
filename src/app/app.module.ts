@@ -24,6 +24,8 @@ import { ReagendarModalComponent } from './components/modals/reagendarModal/reag
 import { AgendaModalComponent } from './components/modals/agendaModal/agendaModal.component';
 import { StoreModule } from '@ngrx/store';
 import { agendamentosReducer } from './_store/agendamento.reducer';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DesagendarModalComponent } from './components/modals/desagendarModal/desagendarModal.component';
 
 
 
@@ -40,6 +42,7 @@ registerLocaleData(localePT);
     AgendarModalComponent,
     ReagendarModalComponent,
     AgendaModalComponent,
+    DesagendarModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +52,7 @@ registerLocaleData(localePT);
     FormsModule,
     HttpClientModule,
     MatDialogModule,
+    MatProgressSpinnerModule,
     ToastrModule.forRoot(),
     StoreModule.forRoot({ agendamentos: agendamentosReducer }),
   ],

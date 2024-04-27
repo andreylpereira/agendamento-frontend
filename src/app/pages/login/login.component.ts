@@ -10,6 +10,7 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  isLoading: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -18,22 +19,30 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      login: ['', [Validators.required]],
-      senha: ['', [Validators.required]],
+      login: ['', [Validators.required, Validators.minLength(5)]],
+      senha: ['', [Validators.required, Validators.minLength(5)]],
     });
   }
 
   login() {
-    if (this.loginForm.invalid) {
-      return;
+    this.isLoading = true;
+
+    setTimeout(() => {
+      if (this.loginForm.invalid) {
+        this.isLoading = false;
+        return;
+      }
+
+      const usuario: Login = {
+        login: this.loginForm.value.login,
+        senha: this.loginForm.value.senha,
+      };
+
+      this.loginService.login(usuario);
+      this.loginForm.reset();
+      this.isLoading = false;
     }
+    , 2000);
 
-    const usuario: Login = {
-      login: this.loginForm.value.login,
-      senha: this.loginForm.value.senha,
-    };
-
-    this.loginService.login(usuario);
-    this.loginForm.reset();
-  }
+}
 }

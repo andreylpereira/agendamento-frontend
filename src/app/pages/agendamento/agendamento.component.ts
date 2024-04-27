@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, filter, map, of } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { selectAgendamentos } from 'src/app/_store/agendamento.selectors';
 import Agendamento from 'src/app/models/agendamento.model';
 import { AgendamentoService } from 'src/app/services/agendamento.service';

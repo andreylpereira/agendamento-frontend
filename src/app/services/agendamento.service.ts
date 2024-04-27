@@ -9,7 +9,6 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AgendamentoService {
   private url = 'http://localhost:8888/api';
-  //  assets/mocks/data.json
 
   constructor(private http: HttpClient, private toastr: ToastrService) {}
 
@@ -17,19 +16,21 @@ export class AgendamentoService {
     return this.http.get<Agendamento[]>(`${this.url}/agenda`);
   }
 
-  addAgendamento(data: any, _id: number, successCallback: (response: any) => void, errorCallback: (error: any) => void) {
-    this.http
-      .post(`${this.url}/agenda/${_id}`, data)
-      .subscribe({
-        next: (response) => {
-          successCallback(response);
-        },
-        error: (error) => {
-          errorCallback(error);
-        }
-      });
+  addAgendamento(
+    data: any,
+    _id: number,
+    successCallback: (response: any) => void,
+    errorCallback: (error: any) => void
+  ) {
+    this.http.post(`${this.url}/agenda/${_id}`, data).subscribe({
+      next: (response) => {
+        successCallback(response);
+      },
+      error: (error) => {
+        errorCallback(error);
+      },
+    });
   }
-
 
   updateAgendamento(data: Agendamento, _id: number) {
     return this.http
@@ -61,13 +62,9 @@ export class AgendamentoService {
       .delete(`${this.url}/agenda/${_id}`, { responseType: 'text' })
       .subscribe({
         next: () => {
-          this.toastr.success(
-            'Agendamento excluído com sucesso!',
-            'ATENÇÃO',
-            {
-              timeOut: 2000,
-            }
-          );
+          this.toastr.success('Agendamento excluído com sucesso!', 'ATENÇÃO', {
+            timeOut: 2000,
+          });
         },
         error: () => {
           this.toastr.error(

@@ -30,11 +30,19 @@ export class ModalService {
   }
 
   agendaModal(referencia: string, dados: Agendamento): void {
-    const dialogRef = this.dialog.open(GenericoModalComponent, {      position: {
+    const dialogRef = this.dialog.open(GenericoModalComponent, {
+      position: {
       top: '60px',
     },
       width: '400px',
       data: { referencia, dados },
+    });
+  }
+
+  desagendarModal(referencia: string, _id: number): void {
+    const dialogRef = this.dialog.open(GenericoModalComponent, {
+      width: '400px',
+      data: { referencia, _id },
     });
   }
 }

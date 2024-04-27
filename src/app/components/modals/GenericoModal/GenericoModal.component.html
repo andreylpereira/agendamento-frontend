@@ -16,6 +16,12 @@
     [closedModal]="fecharModal"
   ></app-reagendar-modal>
 </div>
+<div *ngIf="data.referencia === 'desagendar'">
+  <app-desagendar-modal
+    [data]="data"
+    [closedModal]="fecharModal"
+  ></app-desagendar-modal>
+</div>
 <button
   type="submit"
   class="btn btn-outline-primary btn-block font-weight-bold mt-1 rounded shadow"

@@ -1,4 +1,4 @@
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 * {
   font-family: "Open Sans", sans-serif;
@@ -8,7 +8,7 @@
 
 /* Variaveis */
 $bg-main: linear-gradient(to bottom, #2ecc71, #3498db);
-$bg-alternate: linear-gradient(to top,#2ecc71, #3498db);
+$bg-alternate: linear-gradient(to top, #2ecc71, #3498db);
 $bg-darkblue: #3498db;
 $color-main: #2ecc71;
 $color-main-hover: darken($color-main, 10%);
@@ -90,7 +90,33 @@ $lightgrey: rgba(200, 200, 200, 0.795);
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
+.disabled {
+  background-color: #c0c0c0be;
+}
+
+.invalid-feedback {
+  visibility: hidden;
+}
+
+.is-invalid .invalid-feedback {
+  visibility: visible;
+}
+
 .navbar-brand svg:hover {
-  fill: rgb(176, 176, 199); /* Altere para a cor desejada */
-  transition: fill 0.3s ease; /* Efeito de transição */
+  fill: rgb(176, 176, 199);
+  transition: fill 0.3s ease;
+}
+.mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: $color-main;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+}
+@media (max-height: 669px) {
+  .mat-dialog-container {
+    max-height: 600px !important;
+  }
 }

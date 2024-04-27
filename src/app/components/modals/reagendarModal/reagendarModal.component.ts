@@ -77,7 +77,7 @@ export class ReagendarModalComponent {
       data: [Validators.required],
       hora: [Validators.required],
       titulo: ['', Validators.required],
-      observacao: ['', Validators.required],
+      observacao: [''],
       contato: ['', Validators.required],
       inicioAtendimento: [''],
       fimAtendimento: [''],
@@ -102,13 +102,13 @@ export class ReagendarModalComponent {
       formData.fimAtendimento = this.formatarHora(formData.fimAtendimento);
 
       if (this.isEquals(this.horas, formData.hora)) {
-      this.agendamentoService.updateAgendamento(formData, formData.id);
+        this.agendamentoService.updateAgendamento(formData, formData.id);
 
-      this.store.dispatch(
-        updateAgendamento({ id: formData.id, agendamento: formData })
-      );
-      this.fecharModal();
-       }
+        this.store.dispatch(
+          updateAgendamento({ id: formData.id, agendamento: formData })
+        );
+        this.fecharModal();
+      }
     } else {
       this.toastr.error('Logout efetuado com sucesso.', 'Sucesso!', {
         timeOut: 2000,
@@ -121,17 +121,13 @@ export class ReagendarModalComponent {
   }
 
   formatarHora(hora: string) {
-    // Divide a hora em horas, minutos e segundos
     const partes = hora.split(':');
 
-    // Extrai horas e minutos
     const horas = partes[0];
     const minutos = partes[1];
 
-    // Se não houver segundos, adiciona "00"
     const segundos = partes[2] || '00';
 
-    // Retorna a hora formatada
     return `${horas}:${minutos}:${segundos}`;
   }
 }

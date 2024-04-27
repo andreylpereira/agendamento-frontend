@@ -27,7 +27,7 @@ export class AgendarModalComponent {
       data: [{ value: '', disabled: true }, Validators.required],
       hora: [{ value: '', disabled: true }, Validators.required],
       titulo: ['', Validators.required],
-      observacao: ['', Validators.required],
+      observacao: [''],
       contato: ['', Validators.required],
       inicioAtendimento: ['00:00:00'],
       fimAtendimento: ['00:00:00'],

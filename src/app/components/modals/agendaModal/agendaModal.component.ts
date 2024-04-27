@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { removeAgendamento } from 'src/app/_store/agendamento.action';
 import Agendamento from 'src/app/models/agendamento.model';
 import { AgendamentoService } from 'src/app/services/agendamento.service';
 import { ModalService } from 'src/app/services/modal.service';
@@ -46,9 +45,10 @@ export class AgendaModalComponent {
     this.closedModal();
   }
 
-  desagendar(_id: number) {
-    this.agendamentoService.deleteAgendamento(_id);
-    this.store.dispatch(removeAgendamento({ id: _id }));
+  desagendar(_id: number): void {
+    console.log(_id);
+
+    this.modalService.desagendarModal('desagendar', _id);
     this.closedModal();
   }
 }
