@@ -1,0 +1,90 @@
+<html class="bg-main">
+  <app-navbar></app-navbar>
+  <main style="height: 100vh; display: flex; align-items: center">
+    <div class="card shadow container">
+      <div class="card-body">
+        <div class="align-items-center">
+          <div class="text-center">
+            <h1 class="text-shadow font-weight-bold mb-0">
+              {{ dataSelecionada | date : "d" }}
+            </h1>
+          </div>
+          <div class="row">
+            <div class="col">
+              <hr class="w-25 my-2 bg-main" />
+            </div>
+          </div>
+          <div>
+            <p
+              class="font-weight-bold text-center text-capitalize text-shadow mb-0"
+              style="font-size: 14px"
+            >
+              {{ dataSelecionada | date : "EEEE" : "pt-BR" }}
+            </p>
+          </div>
+          <div class="d-flex justify-content-center">
+            <div id="datePickerContainer" class="mt-4 mb-4">
+              <label for="datePicker" class="mb-0 text-center"
+                >Selecione uma data:</label
+              >
+              <input
+                type="date"
+                id="datePicker"
+                class="form-control text-center cursor-pointer shadow"
+                placeholder="dd/mm/aaaa"
+                [(ngModel)]="dataSelecionada"
+                (ngModelChange)="atualizarListagem()"
+                data-toggle="tooltip"
+                title="Selecione uma data da agenda."
+              />
+            </div>
+          </div>
+          <hr class="w-100 my-2 bg-alternate" />
+          <div class="scrolling">
+            <div class="row container-fluid mb-2" *ngFor="let hora of horas">
+              <div class="col-md-2 order-md-1 order-1 mb-3 mt-2 mb-md-0">
+                <button
+                  type="button"
+                  class="btn bold btn-color-main btn-lg btn-block shadow font-weight-bold"
+                  data-toggle="tooltip"
+                  title="Clique para agendar uma entrega para {{
+                    hora | horaFormatada
+                  }}h."
+                  (click)="agendarModal('adicionar', dataSelecionada, hora)"
+                >
+                  {{ hora | horaFormatada }}
+                </button>
+              </div>
+              <div
+                class="col-md-10 order-md-2 order-2 p-0 mt-2 container text-center"
+              >
+                <div *ngIf="temAgendamento(hora) | async; else disponivel">
+                  <div class="" *ngFor="let agenda of agendamentos$ | async">
+                    <ng-container *ngIf="hora === agenda.hora">
+                      <a
+                        class="alert d-block text-center text-light p-0 mb-1 cursor-pointer rounded-pill shadow"
+                        [style.background-color]="
+                          cores[agenda.id % cores.length]
+                        "
+                        (click)="agendaModal('agenda', agenda)"
+                      >
+                        {{ agenda.titulo }}
+                      </a>
+                    </ng-container>
+                  </div>
+                </div>
+                <ng-template #disponivel>
+                  <p class="disponivel font-italic pt-2">
+                    Nenhum agendamento realizado para este horário.
+                  </p>
+                </ng-template>
+              </div>
+              <hr class="w-100 my-1 bg-lightgrey" />
+            </div>
+          </div>
+        </div>
+        <hr class="w-100 my-2 bg-main" />
+      </div>
+    </div>
+  </main>
+</html>

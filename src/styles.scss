@@ -1,1 +1,122 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+* {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+/* Variaveis */
+$bg-main: linear-gradient(to bottom, #2ecc71, #3498db);
+$bg-alternate: linear-gradient(to top, #2ecc71, #3498db);
+$bg-darkblue: #3498db;
+$color-main: #2ecc71;
+$color-main-hover: darken($color-main, 10%);
+$color-main-focus: lighten($color-main, 10%);
+$color-main-disabled: #ccc;
+$color-alternate: #3498db;
+$color-alternate-hover: darken($color-alternate, 10%);
+$color-alternate-focus: lighten($color-alternate, 10%);
+$lightgrey: rgba(200, 200, 200, 0.795);
+
+.form-text {
+  font-style: italic;
+}
+
+#user-svg {
+  fill: $color-main;
+  stroke: $color-main;
+}
+
+.bg-main {
+  background-image: $bg-main;
+}
+.bg-alternate {
+  background-image: $bg-alternate;
+}
+
+.bg-darkblue {
+  background-color: $bg-darkblue;
+}
+
+.btn {
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-color-main {
+  color: aliceblue;
+  background: #2ecc71;
+  border-color: #2ecc71;
+}
+
+.btn-color-main:hover {
+  background-color: $color-main-hover;
+  border-color: $color-main-hover;
+}
+
+.btn-color-main:focus,
+.btn-color-main.focus {
+  box-shadow: 0 0 0 0.2rem $color-main-focus;
+}
+
+.btn-color-main.disabled,
+.btn-color-main:disabled {
+  background-color: $color-main-disabled;
+  border-color: $color-main-disabled;
+}
+
+.tooltip-inner {
+  background-color: #333;
+  color: #fff;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+.arrow::before {
+  border-top-color: #333;
+}
+
+.bg-lightgrey {
+  background-color: $lightgrey;
+}
+
+.text-shadow {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.disabled {
+  background-color: #c0c0c0be;
+}
+
+.invalid-feedback {
+  visibility: hidden;
+}
+
+.is-invalid .invalid-feedback {
+  visibility: visible;
+}
+
+.navbar-brand svg:hover {
+  fill: rgb(176, 176, 199);
+  transition: fill 0.3s ease;
+}
+.mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: $color-main;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+}
+@media (max-height: 669px) {
+  .mat-dialog-container {
+    max-height: 600px !important;
+  }
+}

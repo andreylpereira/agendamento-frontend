@@ -1,0 +1,96 @@
+<div class="bg-main d-flex justify-content-center align-items-center" style="height: 100vh;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div style="width: 400px;">
+        <div class="card shadow">
+          <div class="card-header">
+            <div class="card-body">
+              <form [formGroup]="loginForm">
+                <div class="text-center mb-3">
+                  <svg
+                    id="user-svg"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="150"
+                    height="150"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M12 14a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0 2c-2.67 0-8 1.337-8 4v2h16v-2c0-2.663-5.33-4-8-4z"
+                    />
+                  </svg>
+                </div>
+                <div class="form-group mb-1">
+                  <label for="login">Login</label>
+                  <input
+                    type="login"
+                    class="form-control"
+                    aria-describedby="helpId"
+                    placeholder="Digite seu login"
+                    formControlName="login"
+                    [class.is-invalid]="
+                      loginForm.get('login')?.touched &&
+                      loginForm.get('login')?.invalid
+                    "
+                  />
+                  <small
+                    id="helpId"
+                    class="form-text text-danger"
+                    [style.visibility]="
+                      loginForm.get('login')?.touched &&
+                      loginForm.get('login')?.invalid
+                        ? 'visible'
+                        : 'hidden'
+                    "
+                  >
+                    <p class="mb-0">* Favor digitar um login válido!</p>
+                  </small>
+                </div>
+                <div class="form-group">
+                  <label for="senha">Senha</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    aria-describedby="helpId"
+                    placeholder="Digite sua senha"
+                    formControlName="senha"
+                    [class.is-invalid]="
+                      loginForm.get('senha')?.touched &&
+                      loginForm.get('senha')?.invalid
+                    "
+                  />
+                  <small
+                    id="helpId"
+                    class="form-text text-danger"
+                    [style.visibility]="
+                      loginForm.get('senha')?.touched &&
+                      loginForm.get('senha')?.invalid
+                        ? 'visible'
+                        : 'hidden'
+                    "
+                  >
+                    <p class="mb-0">* Favor digitar uma senha válida!</p>
+                  </small>
+                </div>
+                <button
+                type="submit"
+                class="btn btn-color-main btn-block font-weight-bold mt-2 rounded shadow"
+                (click)="login()"
+                [disabled]="loginForm.invalid"
+                *ngIf="!isLoading"
+              >
+                ENTRAR
+              </button>
+                <div class="spinner" *ngIf="isLoading">
+                  <mat-spinner diameter="30"></mat-spinner>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
