@@ -77,7 +77,7 @@ export class ReagendarModalComponent {
       data: [Validators.required],
       hora: [Validators.required],
       titulo: ['', Validators.required],
-      observacao: [''],
+      observacao: ['', Validators.required],
       contato: ['', Validators.required],
       inicioAtendimento: [''],
       fimAtendimento: [''],
@@ -92,6 +92,14 @@ export class ReagendarModalComponent {
     return hours.includes(hour);
   }
 
+  isValid(time1: string, time2: string): boolean {
+    return this.compareTimes(time1, time2);
+  }
+
+  compareTimes(time1: string, time2: string): boolean {
+    return time2.localeCompare(time1) >= 0;
+  }
+
   reagendar() {
     if (this.reagendarForm.valid) {
       let formData = this.reagendarForm.value;
@@ -101,7 +109,7 @@ export class ReagendarModalComponent {
       );
       formData.fimAtendimento = this.formatarHora(formData.fimAtendimento);
 
-      if (this.isEquals(this.horas, formData.hora)) {
+      if (this.isEquals(this.horas, formData.hora) && this.compareTimes(formData.inicioAtendimento, formData.inicioAtendimento)) {
         this.agendamentoService.updateAgendamento(formData, formData.id);
 
         this.store.dispatch(
@@ -110,7 +118,7 @@ export class ReagendarModalComponent {
         this.fecharModal();
       }
     } else {
-      this.toastr.error('Logout efetuado com sucesso.', 'Sucesso!', {
+      this.toastr.error('Não é possível reagendar com dados incorretos, verifique os erros abaixo dos campos.', 'ATENÇÃO!', {
         timeOut: 2000,
       });
     }

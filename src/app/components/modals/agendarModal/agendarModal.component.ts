@@ -27,7 +27,7 @@ export class AgendarModalComponent {
       data: [{ value: '', disabled: true }, Validators.required],
       hora: [{ value: '', disabled: true }, Validators.required],
       titulo: ['', Validators.required],
-      observacao: [''],
+      observacao: ['', Validators.required],
       contato: ['', Validators.required],
       inicioAtendimento: ['00:00:00'],
       fimAtendimento: ['00:00:00'],
@@ -55,7 +55,7 @@ export class AgendarModalComponent {
         (response: any) => {
           formData.id = response.id;
           this.store.dispatch(addAgendamento({ agendamento: formData }));
-          this.toastr.success('Agendamento efetuado com sucesso!', 'ATENÇÃO', {
+          this.toastr.success('Agendamento efetuado com sucesso!', 'SUCESSO!', {
             timeOut: 2000,
           });
           this.fecharModal();
@@ -63,8 +63,8 @@ export class AgendarModalComponent {
         (error) => {
           console.error('Erro ao tentar agendar:', error);
           this.toastr.error(
-            'Erro ao tentar agendar, favor tente novamente!',
-            'ATENÇÃO',
+            'Erro ao tentar agendar, favor tente novamente.',
+            'ATENÇÃO!',
             {
               timeOut: 2000,
             }

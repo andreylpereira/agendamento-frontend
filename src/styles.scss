@@ -23,6 +23,10 @@ $lightgrey: rgba(200, 200, 200, 0.795);
   font-style: italic;
 }
 
+label {
+  margin-bottom: 4px;
+}
+
 #user-svg {
   fill: $color-main;
   stroke: $color-main;

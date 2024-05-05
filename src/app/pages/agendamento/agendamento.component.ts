@@ -14,6 +14,7 @@ import { retrievedAgendamentoList } from 'src/app/_store/agendamento.action';
 export class AgendamentoComponent implements OnInit {
   dataSelecionada: string = new Date().toISOString().split('T')[0];
   agendamentos$ = this.store.select(selectAgendamentos);
+
   horas: any = [
     '08:00:00',
     '08:15:00',
@@ -73,9 +74,20 @@ export class AgendamentoComponent implements OnInit {
     '#27AE60',
     '#2980B9',
     '#8E44AD',
-    '#2C3E50',
     '#F39C12',
     '#D35400',
+    '#1ABC9C',
+    '#2ECC71',
+    '#964B00',
+    '#9B59B6',
+    '#E74C3C',
+    '#E67E22',
+    '#95A5A6',
+    '#FF5733',
+    '#FFC300',
+    '#964B00',
+    '#FF57A0',
+    '#57A0FF',
   ];
 
   constructor(
@@ -111,7 +123,6 @@ export class AgendamentoComponent implements OnInit {
       );
   }
 
-
   temAgendamento(hora: string): Observable<boolean> {
     return this.agendamentos$.pipe(
       map((agendamentos: any[]) =>
@@ -124,7 +135,6 @@ export class AgendamentoComponent implements OnInit {
       )
     );
   }
-
 
   agendarModal(
     referencia: string,
@@ -149,6 +159,24 @@ export class AgendamentoComponent implements OnInit {
   }
 
   atualizarCoresAleatorias(): void {
-      this.atualizarListagem();
+    this.atualizarListagem();
+  }
+
+  diference(begin: string, end: String): string {
+    let partBegin = begin.split(':');
+    let partEnd = end.split(':');
+
+    let diferenceMin =
+      parseInt(partEnd[0]) * 60 +
+      parseInt(partEnd[1]) -
+      (parseInt(partBegin[0]) * 60 + parseInt(partBegin[1]));
+
+    let hour = Math.floor(diferenceMin / 60);
+    let minutes = diferenceMin % 60;
+
+    let diference =
+      (hour < 10 ? '0' : '') + hour + ':' + (minutes < 10 ? '0' : '') + minutes;
+
+    return diference;
   }
 }

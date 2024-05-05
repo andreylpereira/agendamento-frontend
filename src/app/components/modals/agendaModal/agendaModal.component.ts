@@ -36,6 +36,7 @@ export class AgendaModalComponent {
 
   }
 
+
   reagendarModal(agenda: Agendamento): void {
     this.modalService.reagendarModal('reagendar', agenda);
     this.closedModal();
@@ -46,8 +47,6 @@ export class AgendaModalComponent {
   }
 
   desagendar(_id: number): void {
-    console.log(_id);
-
     this.modalService.desagendarModal('desagendar', _id);
     this.closedModal();
   }

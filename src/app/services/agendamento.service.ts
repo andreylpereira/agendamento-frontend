@@ -39,7 +39,7 @@ export class AgendamentoService {
         next: () => {
           this.toastr.success(
             'Agendamento atualizado com sucesso!',
-            'ATENÇÃO',
+            'ATENÇÃO!',
             {
               timeOut: 2000,
             }
@@ -47,8 +47,8 @@ export class AgendamentoService {
         },
         error: () => {
           this.toastr.error(
-            'Erro ao tentar atualizar, favor tente novamente!',
-            'ATENÇÃO',
+            'Erro ao tentar atualizar, favor tente novamente.',
+            'ATENÇÃO!',
             {
               timeOut: 2000,
             }
@@ -62,14 +62,14 @@ export class AgendamentoService {
       .delete(`${this.url}/agenda/${_id}`, { responseType: 'text' })
       .subscribe({
         next: () => {
-          this.toastr.success('Agendamento excluído com sucesso!', 'ATENÇÃO', {
+          this.toastr.success('Agendamento excluído com sucesso!', 'ATENÇÃO!', {
             timeOut: 2000,
           });
         },
         error: () => {
           this.toastr.error(
-            'Erro ao tentar excluído, favor tente novamente!',
-            'ATENÇÃO',
+            'Erro ao tentar excluído, favor tente novamente.',
+            'ATENÇÃO!',
             {
               timeOut: 2000,
             }
