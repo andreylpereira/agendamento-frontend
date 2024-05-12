@@ -1,8 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Store } from '@ngrx/store';
 import Agendamento from 'src/app/models/agendamento.model';
-import { AgendamentoService } from 'src/app/services/agendamento.service';
 import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
@@ -16,9 +14,7 @@ export class AgendaModalComponent {
   closedModal!: Function;
   agendaForm!: FormGroup;
 
-  constructor(private modalService: ModalService, private fb: FormBuilder, private agendamentoService: AgendamentoService,
-    private store: Store
-  ) {
+  constructor(private modalService: ModalService, private fb: FormBuilder) {
     this.agendaForm = this.fb.group({
       id: [{ value: '', disabled: true }],
       data: [{ value: '', disabled: true }],
@@ -27,15 +23,13 @@ export class AgendaModalComponent {
       observacao: [{ value: '', disabled: true }],
       contato: [{ value: '', disabled: true }],
       inicioAtendimento: [{ value: '', disabled: true }],
-      fimAtendimento: [{ value: '', disabled: true }]
+      fimAtendimento: [{ value: '', disabled: true }],
     });
   }
 
   ngOnInit() {
-    this.agendaForm.patchValue(this.data.dados)
-
+    this.agendaForm.patchValue(this.data.dados);
   }
-
 
   reagendarModal(agenda: Agendamento): void {
     this.modalService.reagendarModal('reagendar', agenda);

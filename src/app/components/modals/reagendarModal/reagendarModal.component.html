@@ -1,6 +1,6 @@
 <div>
   <h4 class="font-weight-bold text-center">ATUALIZAR AGENDAMENTO</h4>
-  <form [formGroup]="reagendarForm" (ngSubmit)="reagendar()">
+  <form [formGroup]="reagendarForm">
     <div class="form-group mb-0">
       <label for="data">Data</label>
       <input type="date" class="form-control" id="data" formControlName="data">
@@ -23,17 +23,37 @@
         <p class="mb-0">* Favor digitar um contato válido!</p>
       </small>
     </div>
-    <div class="form-group mb-0">
+    <div class="container col-12 p-0">
       <label for="inicioAtendimento">Início</label>
-      <input type="time" class="form-control" id="inicioAtendimento" formControlName="inicioAtendimento">
-    </div>
-    <div class="form-group mb-0">
-      <label for="fimAtendimento">Fim</label>
-      <input type="time" class="form-control" id="fimAtendimento" formControlName="fimAtendimento">
-      <small id="hoursHelp" class="form-text text-danger mb-0" [style.visibility]="!isValid(reagendarForm.get('inicioAtendimento')?.value, reagendarForm.get('fimAtendimento')?.value) ? 'visible' : 'hidden'">
-        <p class="mb-0">* O horário fim deve ser posterior ao de início!</p>
-      </small>
+      <div class="form-group mb-0 row">
+        <div class="col">
+          <p type="time" class="form-control disabled" id="inicioAtendimento" formControlName="inicioAtendimento" *ngIf="(reagendarForm.get('inicioAtendimento')?.value === '00:00:00') || ((reagendarForm.get('inicioAtendimento')?.value !== '00:00:00') && (reagendarForm.get('fimAtendimento')?.value === '00:00:00'))">{{reagendarForm.get('fimAtendimento')?.value | horaFormatada }}</p>
 
+          <input type="time" class="form-control" id="inicioAtendimento" formControlName="inicioAtendimento" *ngIf="(reagendarForm.get('inicioAtendimento')?.value !== '00:00:00') && (reagendarForm.get('fimAtendimento')?.value !== '00:00:00')"/>
+        </div>
+        <div class="col" *ngIf="(reagendarForm.get('inicioAtendimento')?.value === '00:00:00') && (reagendarForm.get('fimAtendimento')?.value === '00:00:00')">
+          <button class="btn btn-primary btn-block font-weight-bold rounded shadow" (click)="iniciarAtendimento()">
+            INICIAR
+          </button>
+        </div>
+      </div>
+      <label for="fimAtendimento">Fim</label>
+      <div class="form-group mb-0 row">
+        <div class="col">
+          <p type="time" class="form-control disabled" id="fimAtendimento" formControlName="fimAtendimento"  *ngIf="(reagendarForm.get('inicioAtendimento')?.value !== '00:00:00') && (reagendarForm.get('fimAtendimento')?.value === '00:00:00')">{{reagendarForm.get('fimAtendimento')?.value | horaFormatada }}</p>
+
+          <input type="time" class="form-control" id="fimAtendimento" formControlName="fimAtendimento"  *ngIf="(reagendarForm.get('inicioAtendimento')?.value !== '00:00:00') && (reagendarForm.get('fimAtendimento')?.value !== '00:00:00')"/>
+          <small id="hoursHelp" class="form-text text-danger mb-0" [style.visibility]="!isValid(reagendarForm.get('inicioAtendimento')?.value, reagendarForm.get('fimAtendimento')?.value) ? 'visible' : 'hidden'"  *ngIf="(reagendarForm.get('inicioAtendimento')?.value !== '00:00:00') && (reagendarForm.get('fimAtendimento')?.value !== '00:00:00')">
+            <p class="mb-0">* O horário fim deve ser posterior ao de início!</p>
+          </small>
+
+        </div>
+        <div class="col" *ngIf="reagendarForm.get('inicioAtendimento')?.value !== '00:00:00' && (reagendarForm.get('fimAtendimento')?.value === '00:00:00')">
+          <button class="btn btn-danger btn-block font-weight-bold rounded shadow" (click)="finalizarAtendimento()" >
+            FINALIZAR
+          </button>
+        </div>
+      </div>
     </div>
     <div class="form-group mb-0">
       <label for="observacao">Observação</label>
@@ -43,7 +63,7 @@
       </small>
     </div>
 
-    <button type="submit" class="btn btn-color-main btn-block font-weight-bold mt-1 rounded shadow">
+    <button class="btn btn-color-main btn-block font-weight-bold mt-1 rounded shadow" (click)="reagendar()">
       ATUALIZAR
     </button>
   </form>
