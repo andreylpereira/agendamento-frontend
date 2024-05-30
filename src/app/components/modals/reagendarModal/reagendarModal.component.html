@@ -27,7 +27,7 @@
       <label for="inicioAtendimento">Início</label>
       <div class="form-group mb-0 row">
         <div class="col">
-          <p type="time" class="form-control disabled" *ngIf="(reagendarForm.get('inicioAtendimento')?.value === '00:00:00') || ((reagendarForm.get('inicioAtendimento')?.value !== '00:00:00') && (reagendarForm.get('fimAtendimento')?.value === '00:00:00'))">{{reagendarForm.get('fimAtendimento')?.value | horaFormatada }}</p>
+          <input type="time" class="form-control disabled" id="inicioAtendimento" formControlName="inicioAtendimento" *ngIf="(reagendarForm.get('inicioAtendimento')?.value === '00:00:00') || ((reagendarForm.get('inicioAtendimento')?.value !== '00:00:00') && (reagendarForm.get('fimAtendimento')?.value === '00:00:00'))"/>
 
           <input type="time" class="form-control" id="inicioAtendimento" formControlName="inicioAtendimento" *ngIf="(reagendarForm.get('inicioAtendimento')?.value !== '00:00:00') && (reagendarForm.get('fimAtendimento')?.value !== '00:00:00')"/>
         </div>

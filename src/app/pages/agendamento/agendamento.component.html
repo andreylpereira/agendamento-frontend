@@ -69,9 +69,9 @@
                         (click)="agendaModal('agenda', agenda)"
                       >
                         <b>{{ agenda.titulo }}</b>
-                        <i *ngIf="this.diference(agenda.inicioAtendimento,agenda.fimAtendimento) === '00:00'"> [status: Não iniciado]
+                        <i *ngIf="(this.diference(agenda.inicioAtendimento,agenda.fimAtendimento) === '00:00') && (agenda.inicioAtendimento === '00:00:00')"> [status: Não iniciado]
                         </i>
-                        <i *ngIf="this.diference(agenda.inicioAtendimento,agenda.fimAtendimento) > '00:00'"> [status: Concluído]
+                        <i *ngIf="((agenda.inicioAtendimento !== '00:00:00') && (agenda.fimAtendimento !== '00:00:00'))"> [status: Concluído]
                         </i>
                         <i *ngIf="this.diference(agenda.inicioAtendimento,agenda.fimAtendimento) < '00:00'"> [status: Em andamento]
                         </i>

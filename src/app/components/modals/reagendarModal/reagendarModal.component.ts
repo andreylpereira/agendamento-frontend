@@ -171,10 +171,12 @@ export class ReagendarModalComponent {
               this.store.dispatch(
                 updateAgendamento({ id: formData.id, agendamento: formData })
               );
+              this.reagendarForm.patchValue({ inicioAtendimento: this.formatarHora(
+                formData.inicioAtendimento) });
               this.toastr.success('Atendimento iniciado!', 'ATENÇÃO!', {
                 timeOut: 2000,
               });
-              this.fecharModal();
+              //this.fecharModal();
             },
             error: () => {
               this.toastr.error(
@@ -217,10 +219,12 @@ export class ReagendarModalComponent {
               this.store.dispatch(
                 updateAgendamento({ id: formData.id, agendamento: formData })
               );
+              this.reagendarForm.patchValue({ fimAtendimento: this.formatarHora(
+                formData.fimAtendimento) });
               this.toastr.success('Atendimento finalizado!', 'ATENÇÃO!', {
                 timeOut: 2000,
               });
-              this.fecharModal();
+              //this.fecharModal();
             },
             error: () => {
               this.toastr.error(

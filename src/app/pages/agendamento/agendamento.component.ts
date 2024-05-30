@@ -35,7 +35,7 @@ export class AgendamentoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.atualizarListagem();
+    // this.atualizarListagem();
     this.atualizarCoresAleatorias();
   }
 
