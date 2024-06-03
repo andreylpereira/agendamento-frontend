@@ -23,6 +23,7 @@
         <p class="mb-0">* Favor digitar um contato válido!</p>
       </small>
     </div>
+
     <div class="container col-12 p-0">
       <label for="inicioAtendimento">Início</label>
       <div class="form-group mb-0 row">
@@ -40,7 +41,8 @@
       <label for="fimAtendimento">Fim</label>
       <div class="form-group mb-0 row">
         <div class="col">
-          <p type="time" class="form-control disabled"  *ngIf="(reagendarForm.get('inicioAtendimento')?.value !== '00:00:00') && (reagendarForm.get('fimAtendimento')?.value === '00:00:00')">{{reagendarForm.get('fimAtendimento')?.value | horaFormatada }}</p>
+
+          <input type="time" class="form-control disabled"  id="fimAtendimento" formControlName="fimAtendimento"  *ngIf="(reagendarForm.get('inicioAtendimento')?.value !== '00:00:00') && (reagendarForm.get('fimAtendimento')?.value === '00:00:00')"/>
 
           <input type="time" class="form-control" id="fimAtendimento" formControlName="fimAtendimento"  *ngIf="(reagendarForm.get('inicioAtendimento')?.value !== '00:00:00') && (reagendarForm.get('fimAtendimento')?.value !== '00:00:00')"/>
           <small id="hoursHelp" class="form-text text-danger mb-0" [style.visibility]="!isValid(reagendarForm.get('inicioAtendimento')?.value, reagendarForm.get('fimAtendimento')?.value) ? 'visible' : 'hidden'"  *ngIf="(reagendarForm.get('inicioAtendimento')?.value !== '00:00:00') && (reagendarForm.get('fimAtendimento')?.value !== '00:00:00')">
