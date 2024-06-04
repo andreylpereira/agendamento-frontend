@@ -88,6 +88,7 @@ export class AgendaModalComponent {
 
   ngOnInit() {
     this.agendaForm.patchValue(this.data.dados);
+    this.formData = { ...this.agendaForm.value };
   }
 
   reagendarModal(agenda: any): void {
