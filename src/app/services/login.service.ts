@@ -45,12 +45,12 @@ export class LoginService {
         this.user.token = `${res.acessToken}`
         localStorage.setItem('currentUser', JSON.stringify(this.user));
         this.router.navigate(['/home']);
-        this.toastr.success('Login efetuado com sucesso.', 'Sucesso!', {
+        this.toastr.success('Login efetuado com sucesso!', 'SUCESSO!', {
           timeOut: 2000,
         });
       },
       error: (err: any) => {
-        this.toastr.error('Não foi possível iniciar a sessão.', 'Error!', {
+        this.toastr.error('Não foi possível iniciar a sessão.', 'ATENÇÃO!', {
           timeOut: 2000,
         });
       },
@@ -59,7 +59,7 @@ export class LoginService {
 
   logOut() {
     localStorage.removeItem('currentUser');
-    this.toastr.success('Logout efetuado com sucesso.', 'Sucesso!', {
+    this.toastr.success('Logout efetuado com sucesso!', 'SUCESSO!', {
       timeOut: 2000,
     });
     this.router.navigate(['auth']);

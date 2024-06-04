@@ -73,12 +73,12 @@ export class ReagendarModalComponent {
     private store: Store
   ) {
     this.reagendarForm = this.fb.group({
-      id: [Validators.required],
-      data: [Validators.required],
-      hora: [Validators.required],
+      id: ['', Validators.required],
+      data: ['', Validators.required],
+      hora: ['', Validators.required],
       titulo: ['', Validators.required],
-      observacao: [''],
-      contato: ['', Validators.required],
+      observacao: ['', Validators.required],
+      contato: ['', Validators.required,],
       inicioAtendimento: [''],
       fimAtendimento: [''],
     });
@@ -92,6 +92,14 @@ export class ReagendarModalComponent {
     return hours.includes(hour);
   }
 
+  isValid(time1: string, time2: string): boolean {
+    return this.compareTimes(time1, time2);
+  }
+
+  compareTimes(time1: string, time2: string): boolean {
+    return time2.localeCompare(time1) >= 0;
+  }
+
   reagendar() {
     if (this.reagendarForm.valid) {
       let formData = this.reagendarForm.value;
@@ -101,18 +109,138 @@ export class ReagendarModalComponent {
       );
       formData.fimAtendimento = this.formatarHora(formData.fimAtendimento);
 
-      if (this.isEquals(this.horas, formData.hora)) {
-        this.agendamentoService.updateAgendamento(formData, formData.id);
-
-        this.store.dispatch(
-          updateAgendamento({ id: formData.id, agendamento: formData })
-        );
+      if (
+        this.isEquals(this.horas, formData.hora) &&
+        this.compareTimes(
+          formData.inicioAtendimento,
+          formData.inicioAtendimento
+        )
+      ) {
+        this.agendamentoService
+          .updateAgendamento(formData, formData.id)
+          .subscribe({
+            next: () => {
+              this.store.dispatch(
+                updateAgendamento({ id: formData.id, agendamento: formData })
+              );
+              this.toastr.success(
+                'Agendamento atualizado com sucesso!',
+                'ATENÇÃO!',
+                { timeOut: 2000 }
+              );
+            },
+            error: () => {
+              this.toastr.error(
+                'Erro ao tentar atualizar, favor tentar novamente.',
+                'ATENÇÃO!',
+                { timeOut: 2000 }
+              );
+            },
+          });
         this.fecharModal();
       }
     } else {
-      this.toastr.error('Logout efetuado com sucesso.', 'Sucesso!', {
-        timeOut: 2000,
-      });
+      this.toastr.error(
+        'Não é possível reagendar com dados incorretos, verifique os erros abaixo dos campos.',
+        'ATENÇÃO!',
+        { timeOut: 2000 }
+      );
+    }
+  }
+
+  iniciarAtendimento() {
+    const dataAtual = new Date();
+    const horaAtualizada = `${dataAtual.getHours()}:${dataAtual.getMinutes()}`;
+    let formData = { ...this.reagendarForm.value };
+    formData.hora = this.formatarHora(formData.hora);
+    formData.inicioAtendimento = this.formatarHora(horaAtualizada);
+    formData.fimAtendimento = this.formatarHora(formData.fimAtendimento);
+
+    if (this.reagendarForm.valid) {
+      if (
+        this.isEquals(this.horas, formData.hora) &&
+        this.compareTimes(
+          formData.inicioAtendimento,
+          formData.inicioAtendimento
+        )
+      ) {
+        this.agendamentoService
+          .updateAgendamento(formData, formData.id)
+          .subscribe({
+            next: () => {
+              this.store.dispatch(
+                updateAgendamento({ id: formData.id, agendamento: formData })
+              );
+              this.reagendarForm.patchValue({ inicioAtendimento: this.formatarHora(
+                formData.inicioAtendimento) });
+              this.toastr.success('Atendimento iniciado!', 'ATENÇÃO!', {
+                timeOut: 2000,
+              });
+              //this.fecharModal();
+            },
+            error: () => {
+              this.toastr.error(
+                'Erro ao tentar iniciar o atendimento, favor tentar novamente.',
+                'ATENÇÃO!',
+                { timeOut: 2000 }
+              );
+            },
+          });
+      }
+    } else {
+      this.toastr.error(
+        'Não é possível iniciar o atendimento com dados incorretos, verifique os erros abaixo dos campos.',
+        'ATENÇÃO!',
+        { timeOut: 2000 }
+      );
+    }
+  }
+
+  finalizarAtendimento() {
+    const dataAtual = new Date();
+    const horaAtualizada = `${dataAtual.getHours()}:${dataAtual.getMinutes()}`;
+    let formData = { ...this.reagendarForm.value };
+    formData.hora = this.formatarHora(formData.hora);
+    formData.inicioAtendimento = this.formatarHora(formData.inicioAtendimento);
+    formData.fimAtendimento = this.formatarHora(horaAtualizada);
+
+    if (this.reagendarForm.valid) {
+      if (
+        this.isEquals(this.horas, formData.hora) &&
+        this.compareTimes(
+          formData.inicioAtendimento,
+          formData.inicioAtendimento
+        )
+      ) {
+        this.agendamentoService
+          .updateAgendamento(formData, formData.id)
+          .subscribe({
+            next: () => {
+              this.store.dispatch(
+                updateAgendamento({ id: formData.id, agendamento: formData })
+              );
+              this.reagendarForm.patchValue({ fimAtendimento: this.formatarHora(
+                formData.fimAtendimento) });
+              this.toastr.success('Atendimento finalizado!', 'ATENÇÃO!', {
+                timeOut: 2000,
+              });
+              //this.fecharModal();
+            },
+            error: () => {
+              this.toastr.error(
+                'Erro ao tentar finalizar o atendimento, favor tentar novamente.',
+                'ATENÇÃO!',
+                { timeOut: 2000 }
+              );
+            },
+          });
+      }
+    } else {
+      this.toastr.error(
+        'Não é possível finalizar o atendimento com dados incorretos, verifique os erros abaixo dos campos.',
+        'ATENÇÃO!',
+        { timeOut: 2000 }
+      );
     }
   }
 
@@ -122,12 +250,9 @@ export class ReagendarModalComponent {
 
   formatarHora(hora: string) {
     const partes = hora.split(':');
-
     const horas = partes[0];
     const minutos = partes[1];
-
     const segundos = partes[2] || '00';
-
     return `${horas}:${minutos}:${segundos}`;
   }
 }

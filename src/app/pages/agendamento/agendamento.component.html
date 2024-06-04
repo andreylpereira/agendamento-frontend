@@ -61,15 +61,21 @@
                 <div *ngIf="temAgendamento(hora) | async; else disponivel">
                   <div class="" *ngFor="let agenda of agendamentos$ | async">
                     <ng-container *ngIf="hora === agenda.hora">
-                      <a
+                      <p
                         class="alert d-block text-center text-light p-0 mb-1 cursor-pointer rounded-pill shadow"
                         [style.background-color]="
                           cores[agenda.id % cores.length]
                         "
                         (click)="agendaModal('agenda', agenda)"
                       >
-                        {{ agenda.titulo }}
-                      </a>
+                        <b>{{ agenda.titulo }}</b>
+                        <i *ngIf="(this.diference(agenda.inicioAtendimento,agenda.fimAtendimento) === '00:00') && (agenda.inicioAtendimento === '00:00:00')"> [status: Não iniciado]
+                        </i>
+                        <i *ngIf="((agenda.inicioAtendimento !== '00:00:00') && (agenda.fimAtendimento !== '00:00:00'))"> [status: Concluído]
+                        </i>
+                        <i *ngIf="this.diference(agenda.inicioAtendimento,agenda.fimAtendimento) < '00:00'"> [status: Em andamento]
+                        </i>
+                      </p>
                     </ng-container>
                   </div>
                 </div>

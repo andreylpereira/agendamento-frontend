@@ -33,43 +33,23 @@ export class AgendamentoService {
   }
 
   updateAgendamento(data: Agendamento, _id: number) {
-    return this.http
-      .put(`${this.url}/agenda/${_id}`, data, { responseType: 'text' })
-      .subscribe({
-        next: () => {
-          this.toastr.success(
-            'Agendamento atualizado com sucesso!',
-            'ATENÇÃO',
-            {
-              timeOut: 2000,
-            }
-          );
-        },
-        error: () => {
-          this.toastr.error(
-            'Erro ao tentar atualizar, favor tente novamente!',
-            'ATENÇÃO',
-            {
-              timeOut: 2000,
-            }
-          );
-        },
-      });
+    return this.http.put(`${this.url}/agenda/${_id}`, data, { responseType: 'text' });
   }
+
 
   deleteAgendamento(_id: number) {
     return this.http
       .delete(`${this.url}/agenda/${_id}`, { responseType: 'text' })
       .subscribe({
         next: () => {
-          this.toastr.success('Agendamento excluído com sucesso!', 'ATENÇÃO', {
+          this.toastr.success('Agendamento excluído com sucesso!', 'ATENÇÃO!', {
             timeOut: 2000,
           });
         },
         error: () => {
           this.toastr.error(
-            'Erro ao tentar excluído, favor tente novamente!',
-            'ATENÇÃO',
+            'Erro ao tentar excluído, favor tente novamente.',
+            'ATENÇÃO!',
             {
               timeOut: 2000,
             }

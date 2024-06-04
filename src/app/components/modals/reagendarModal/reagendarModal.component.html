@@ -1,11 +1,11 @@
 <div>
   <h4 class="font-weight-bold text-center">ATUALIZAR AGENDAMENTO</h4>
-  <form [formGroup]="reagendarForm" (ngSubmit)="reagendar()">
-    <div class="form-group">
+  <form [formGroup]="reagendarForm">
+    <div class="form-group mb-0">
       <label for="data">Data</label>
       <input type="date" class="form-control" id="data" formControlName="data">
     </div>
-    <div class="form-group">
+    <div class="form-group mb-0">
       <label for="hora">Hora</label>
       <input type="time" class="form-control" id="hora" formControlName="hora">
     </div>
@@ -23,20 +23,49 @@
         <p class="mb-0">* Favor digitar um contato válido!</p>
       </small>
     </div>
-    <div class="form-group">
+
+    <div class="container col-12 p-0">
       <label for="inicioAtendimento">Início</label>
-      <input type="time" class="form-control" id="inicioAtendimento" formControlName="inicioAtendimento">
-    </div>
-    <div class="form-group">
+      <div class="form-group mb-0 row">
+        <div class="col">
+          <input type="time" class="form-control disabled" id="inicioAtendimento" formControlName="inicioAtendimento" *ngIf="(reagendarForm.get('inicioAtendimento')?.value === '00:00:00') || ((reagendarForm.get('inicioAtendimento')?.value !== '00:00:00') && (reagendarForm.get('fimAtendimento')?.value === '00:00:00'))"/>
+
+          <input type="time" class="form-control" id="inicioAtendimento" formControlName="inicioAtendimento" *ngIf="(reagendarForm.get('inicioAtendimento')?.value !== '00:00:00') && (reagendarForm.get('fimAtendimento')?.value !== '00:00:00')"/>
+        </div>
+        <div class="col" *ngIf="(reagendarForm.get('inicioAtendimento')?.value === '00:00:00') && (reagendarForm.get('fimAtendimento')?.value === '00:00:00')">
+          <button class="btn btn-primary btn-block font-weight-bold rounded shadow" (click)="iniciarAtendimento()">
+            INICIAR
+          </button>
+        </div>
+      </div>
       <label for="fimAtendimento">Fim</label>
-      <input type="time" class="form-control" id="fimAtendimento" formControlName="fimAtendimento">
+      <div class="form-group mb-0 row">
+        <div class="col">
+
+          <input type="time" class="form-control disabled"  id="fimAtendimento" formControlName="fimAtendimento"  *ngIf="(reagendarForm.get('inicioAtendimento')?.value !== '00:00:00') && (reagendarForm.get('fimAtendimento')?.value === '00:00:00')"/>
+
+          <input type="time" class="form-control" id="fimAtendimento" formControlName="fimAtendimento"  *ngIf="(reagendarForm.get('inicioAtendimento')?.value !== '00:00:00') && (reagendarForm.get('fimAtendimento')?.value !== '00:00:00')"/>
+          <small id="hoursHelp" class="form-text text-danger mb-0" [style.visibility]="!isValid(reagendarForm.get('inicioAtendimento')?.value, reagendarForm.get('fimAtendimento')?.value) ? 'visible' : 'hidden'"  *ngIf="(reagendarForm.get('inicioAtendimento')?.value !== '00:00:00') && (reagendarForm.get('fimAtendimento')?.value !== '00:00:00')">
+            <p class="mb-0">* O horário fim deve ser posterior ao de início!</p>
+          </small>
+
+        </div>
+        <div class="col" *ngIf="reagendarForm.get('inicioAtendimento')?.value !== '00:00:00' && (reagendarForm.get('fimAtendimento')?.value === '00:00:00')">
+          <button class="btn btn-danger btn-block font-weight-bold rounded shadow" (click)="finalizarAtendimento()" >
+            FINALIZAR
+          </button>
+        </div>
+      </div>
     </div>
-    <div class="form-group">
+    <div class="form-group mb-0">
       <label for="observacao">Observação</label>
       <textarea class="form-control" id="observacao" formControlName="observacao"></textarea>
+      <small id="observacaoHelp" class="form-text text-danger mb-0" [style.visibility]="reagendarForm.get('observacao')?.touched && reagendarForm.get('observacao')?.invalid ? 'visible' : 'hidden'">
+        <p class="mb-0">* Favor escrever uma observação sobre o agendamento!</p>
+      </small>
     </div>
 
-    <button type="submit" class="btn btn-color-main btn-block font-weight-bold mt-1 rounded shadow">
+    <button class="btn btn-color-main btn-block font-weight-bold mt-1 rounded shadow" (click)="reagendar()">
       ATUALIZAR
     </button>
   </form>

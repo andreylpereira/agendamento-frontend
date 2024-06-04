@@ -61,7 +61,7 @@ registerLocaleData(localePT);
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: LOCALE_ID, useValue: 'pt-br' },
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
   ],
   bootstrap: [AppComponent]
 })

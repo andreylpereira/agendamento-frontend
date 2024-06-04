@@ -26,6 +26,9 @@
     <div class="form-group">
       <label for="observacao">Observação</label>
       <textarea class="form-control" id="observacao" formControlName="observacao"></textarea>
+      <small id="observacaoHelp" class="form-text text-danger mb-0" [style.visibility]="agendarForm.get('observacao')?.touched && agendarForm.get('observacao')?.invalid ? 'visible' : 'hidden'">
+        <p class="mb-0">* Favor escrever uma observação sobre o agendamento!</p>
+      </small>
     </div>
     <button type="submit" class="btn btn-color-main btn-block font-weight-bold mt-1 rounded shadow">AGENDAR</button>
   </form>
