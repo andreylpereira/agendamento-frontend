@@ -16,21 +16,48 @@
     <label for="contato">Contato</label>
     <input type="text" class="form-control disabled" id="contato" formControlName="contato" required />
   </div>
-  <div class="form-group mb-0">
+  <div class="container col-12 p-0">
     <label for="inicioAtendimento">Início</label>
-    <input type="time" class="form-control disabled" id="inicioAtendimento" formControlName="inicioAtendimento" />
-  </div>
-  <div class="form-group mb-0">
+    <div class="form-group mb-0 row">
+      <div class="col">
+        <input type="time" class="form-control disabled" id="inicioAtendimento" formControlName="inicioAtendimento" *ngIf="(agendaForm.get('inicioAtendimento')?.value === '00:00:00') || ((agendaForm.get('inicioAtendimento')?.value !== '00:00:00') && (agendaForm.get('fimAtendimento')?.value === '00:00:00'))"/>
+
+        <input type="time" class="form-control disabled" id="inicioAtendimento" formControlName="inicioAtendimento" *ngIf="(agendaForm.get('inicioAtendimento')?.value !== '00:00:00') && (agendaForm.get('fimAtendimento')?.value !== '00:00:00')"/>
+      </div>
+      <div class="col" *ngIf="(agendaForm.get('inicioAtendimento')?.value === '00:00:00') && (agendaForm.get('fimAtendimento')?.value === '00:00:00')">
+        <button class="btn btn-primary btn-block font-weight-bold rounded shadow" (click)="iniciarAtendimento()">
+          INICIAR
+        </button>
+      </div>
+
+    </div>
     <label for="fimAtendimento">Fim</label>
-    <input type="time" class="form-control disabled" id="fimAtendimento" formControlName="fimAtendimento" />
-  </div>
+    <div class="form-group mb-0 row">
+      <div class="col">
+
+        <input type="time" class="form-control disabled"  id="fimAtendimento" formControlName="fimAtendimento"  *ngIf="(agendaForm.get('inicioAtendimento')?.value !== '00:00:00') && (agendaForm.get('fimAtendimento')?.value === '00:00:00')"/>
+
+        <input type="time" class="form-control disabled" id="fimAtendimento" formControlName="fimAtendimento"  *ngIf="(agendaForm.get('inicioAtendimento')?.value !== '00:00:00') && (agendaForm.get('fimAtendimento')?.value !== '00:00:00')"/>
+        <small id="hoursHelp" class="form-text text-danger mb-0" [style.visibility]="!isValid(agendaForm.get('inicioAtendimento')?.value, agendaForm.get('fimAtendimento')?.value) ? 'visible' : 'hidden'"  *ngIf="(agendaForm.get('inicioAtendimento')?.value !== '00:00:00') && (agendaForm.get('fimAtendimento')?.value !== '00:00:00')">
+          <p class="mb-0">* O horário fim deve ser posterior ao de início!</p>
+        </small>
+
+      </div>
+      <div class="col" *ngIf="agendaForm.get('inicioAtendimento')?.value !== '00:00:00' && (agendaForm.get('fimAtendimento')?.value === '00:00:00')">
+        <button class="btn btn-danger btn-block font-weight-bold rounded shadow" (click)="finalizarAtendimento()" >
+          FINALIZAR
+        </button>
+      </div>
+    </div>
+    </div>
+
   <div class="form-group mb-0">
     <label for="observacao">Observação</label>
     <textarea class="form-control disabled" id="observacao" formControlName="observacao"></textarea>
   </div>
   <button type="submit" class="btn btn-color-main btn-block font-weight-bold mt-4 rounded shadow"
-    (click)="reagendarModal(data.dados)">
-    ATUALIZAR
+    (click)="reagendarModal(this.formData)">
+    ATUALIZAR / REAGENDAR
   </button>
   <button type="submit" class="btn btn-danger btn-block font-weight-bold mt-1 rounded shadow"
     (click)="desagendar(data.dados.id)">
