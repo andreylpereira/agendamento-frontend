@@ -36,6 +36,15 @@ export class AgendaModalComponent {
 
   }
 
+  fillCurrentDateTime() {
+    const now = new Date();
+    const hours = ('0' + now.getHours()).slice(-2);
+    const minutes = ('0' + now.getMinutes()).slice(-2);
+    const currentTime = hours + ':' + minutes;
+    this.agendaForm.patchValue({
+      inicioAtendimento: currentTime
+    });
+  }
 
   reagendarModal(agenda: Agendamento): void {
     this.modalService.reagendarModal('reagendar', agenda);

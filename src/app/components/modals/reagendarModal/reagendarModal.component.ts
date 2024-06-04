@@ -87,6 +87,17 @@ export class ReagendarModalComponent {
   ngOnInit() {
     this.reagendarForm.patchValue(this.data.dados);
   }
+ // Adicionado essa função para pegar hora atual ao clicar no botão iniciar
+  setCurrentDateTime() {
+    const now = new Date();
+    const formattedDate = now.toISOString().substring(0, 10); 
+    const formattedTime = now.toTimeString().substring(0, 5); 
+
+    this.reagendarForm.patchValue({
+      data: formattedDate,
+      inicioAtendimento: formattedTime
+    });
+  }
 
   isEquals(hours: string[], hour: string): boolean {
     return hours.includes(hour);
@@ -104,9 +115,7 @@ export class ReagendarModalComponent {
     if (this.reagendarForm.valid) {
       let formData = this.reagendarForm.value;
       formData.hora = this.formatarHora(formData.hora);
-      formData.inicioAtendimento = this.formatarHora(
-        formData.inicioAtendimento
-      );
+      formData.inicioAtendimento = this.formatarHora(formData.inicioAtendimento);
       formData.fimAtendimento = this.formatarHora(formData.fimAtendimento);
 
       if (this.isEquals(this.horas, formData.hora) && this.compareTimes(formData.inicioAtendimento, formData.inicioAtendimento)) {
@@ -130,12 +139,20 @@ export class ReagendarModalComponent {
 
   formatarHora(hora: string) {
     const partes = hora.split(':');
-
     const horas = partes[0];
     const minutos = partes[1];
-
     const segundos = partes[2] || '00';
 
     return `${horas}:${minutos}:${segundos}`;
+  }
+// Adicionado essa função para pegar hora atual ao clicar no botão termino
+  preencherDataHoraAtual() {
+    const now = new Date();
+    const formattedDate = now.toISOString().substring(0, 10); 
+    const formattedTime = now.toTimeString().substring(0, 5); 
+
+    this.reagendarForm.patchValue({
+      fimAtendimento: formattedTime
+    });
   }
 }

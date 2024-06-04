@@ -10,10 +10,10 @@
       <input type="time" class="form-control" id="hora" formControlName="hora">
     </div>
     <div class="form-group mb-0">
-      <label for="titulo">Título</label>
+      <label for="titulo">Empresa</label>
       <input type="text" class="form-control" id="titulo" formControlName="titulo" required>
       <small id="tituloHelp" class="form-text text-danger mb-0" [style.visibility]="reagendarForm.get('titulo')?.touched && reagendarForm.get('titulo')?.invalid ? 'visible' : 'hidden'">
-        <p class="mb-0">* Favor digitar um título válido!</p>
+        <p class="mb-0">* Favor digitar um Empresa válido!</p>
       </small>
     </div>
     <div class="form-group mb-0">
@@ -23,18 +23,29 @@
         <p class="mb-0">* Favor digitar um contato válido!</p>
       </small>
     </div>
-    <div class="form-group mb-0">
-      <label for="inicioAtendimento">Início</label>
-      <input type="time" class="form-control" id="inicioAtendimento" formControlName="inicioAtendimento">
+    <div class="form-group mb-0 d-flex align-items-center">
+      <div class="flex-grow-1">
+        <label for="inicioAtendimento">Horário de inicialização</label>
+        <input type="time" class="form-control" id="inicioAtendimento" formControlName="inicioAtendimento">
+      </div>
+      <div class="ml-2 mt-4">
+        <button type="button" class="btn btn-secondary" (click)="setCurrentDateTime()">Inciar</button>
+      </div>
     </div>
+    
     <div class="form-group mb-0">
-      <label for="fimAtendimento">Fim</label>
-      <input type="time" class="form-control" id="fimAtendimento" formControlName="fimAtendimento">
+      <label for="fimAtendimento">Horário de finalização do atendimento</label>
+      <div class="input-group">
+        <input type="time" class="form-control" id="fimAtendimento" formControlName="fimAtendimento">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button" (click)="preencherDataHoraAtual()">Término</button>
+        </div>
+      </div>
       <small id="hoursHelp" class="form-text text-danger mb-0" [style.visibility]="!isValid(reagendarForm.get('inicioAtendimento')?.value, reagendarForm.get('fimAtendimento')?.value) ? 'visible' : 'hidden'">
         <p class="mb-0">* O horário fim deve ser posterior ao de início!</p>
       </small>
-
     </div>
+    
     <div class="form-group mb-0">
       <label for="observacao">Observação</label>
       <textarea class="form-control" id="observacao" formControlName="observacao"></textarea>

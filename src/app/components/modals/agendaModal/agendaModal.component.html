@@ -9,7 +9,7 @@
     <input type="time" class="form-control disabled" id="hora" formControlName="hora" />
   </div>
   <div class="form-group mb-0">
-    <label for="titulo">Título</label>
+    <label for="titulo">Empresa</label>
     <input type="text" class="form-control disabled" id="titulo" formControlName="titulo" required />
   </div>
   <div class="form-group mb-0">
@@ -17,11 +17,11 @@
     <input type="text" class="form-control disabled" id="contato" formControlName="contato" required />
   </div>
   <div class="form-group mb-0">
-    <label for="inicioAtendimento">Início</label>
+    <label for="inicioAtendimento">Início do atendimento</label>
     <input type="time" class="form-control disabled" id="inicioAtendimento" formControlName="inicioAtendimento" />
   </div>
   <div class="form-group mb-0">
-    <label for="fimAtendimento">Fim</label>
+    <label for="fimAtendimento">Fim do atendimento</label>
     <input type="time" class="form-control disabled" id="fimAtendimento" formControlName="fimAtendimento" />
   </div>
   <div class="form-group mb-0">
@@ -30,8 +30,8 @@
   </div>
   <button type="submit" class="btn btn-color-main btn-block font-weight-bold mt-4 rounded shadow"
     (click)="reagendarModal(data.dados)">
-    REAGENDAR
-  </button>
+    REAGENDAR / ATUALIZAR  <! -- Alterado Nome do Botão -->
+  </button> 
   <button type="submit" class="btn btn-danger btn-block font-weight-bold mt-1 rounded shadow"
     (click)="desagendar(data.dados.id)">
     DESAGENDAR
